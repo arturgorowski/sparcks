@@ -2,6 +2,7 @@ export default {
   login: 'Login',
   loading: 'Loading',
   password: 'Password',
+  username: 'Username',
   email: 'Email',
   home: 'Home',
   homeMessage: 'Welcome',

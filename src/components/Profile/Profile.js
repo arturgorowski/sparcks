@@ -1,8 +1,5 @@
-import React, { useCallback, useEffect } from 'react';
-import {
-  View,
-  Text,
-} from 'react-native';
+import React, {useCallback, useEffect} from 'react';
+import {View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 

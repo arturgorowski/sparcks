@@ -1,24 +1,26 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './styles';
 
-import TextStyles from 'helpers/TextStyles';
-import strings from 'localization';
-import getUser from 'selectors/UserSelectors';
+import TextStyles from '../../helpers/TextStyles';
+import strings from '../../localization';
+import getUser from '../../selectors/UserSelectors';
 
 function Home() {
+
     const user = useSelector(state => getUser(state));
-    const getMessage = useCallback(() => `${strings.homeMessage} ${user && user.name}`, [user]);
+    console.log('user', user);
+    const getName = useCallback(() => `${user && user.firstName}`, [user]);
+
 
     return (
         <View style={styles.container}>
             <Text style={TextStyles.lightTitle}>
-                {strings.home}
+                {getName()}
             </Text>
             <Text>
-                {getMessage()}
             </Text>
         </View>
     );

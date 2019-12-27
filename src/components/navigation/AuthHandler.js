@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
-import getUser from '/home/artur/praca_inż/sparcks/src/selectors/UserSelectors';
-import Colors from '/home/artur/praca_inż/sparcks/src/helpers/Colors';
+import getUser from '../../selectors/UserSelectors';
+import Colors from '../../helpers/Colors';
 
 const styles = StyleSheet.create({
   container: {

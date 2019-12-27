@@ -1,9 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-    View,
-    Image,
-    StatusBar,
-} from 'react-native';
+import {View, Image, StatusBar} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -19,7 +15,7 @@ import strings from '../../localization';
 import {login, actionTypes} from '../../actions/UserActions';
 
 function Login(props) {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const user = useSelector(state => getUser(state));
@@ -27,9 +23,10 @@ function Login(props) {
     const errors = useSelector(state => errorsSelector([actionTypes.LOGIN], state));
 
     const dispatch = useDispatch();
-    const loginUser = useCallback(() => dispatch(login(email, password)), [email, password, dispatch]);
+    const loginUser = useCallback(() => dispatch(login(username, password)), [username, password, dispatch]);
     const passwordChanged = useCallback(value => setPassword(value), []);
-    const emailChanged = useCallback(value => setEmail(value), []);
+    const usernameChanged = useCallback(value => setUsername(value), []);
+
 
     useEffect(() => {
         if (user !== null) {
@@ -42,9 +39,9 @@ function Login(props) {
             <StatusBar backgroundColor="#ffffff" barStyle="dark-content"/>
             <Image style={styles.logo} source={require('../../assets/logo/sparcks.png')}/>
             <TextField
-                placeholder={strings.email}
-                onChangeText={emailChanged}
-                value={email}
+                placeholder={strings.username}
+                onChangeText={usernameChanged}
+                value={username}
                 returnKeyType="next"
             />
             <TextField

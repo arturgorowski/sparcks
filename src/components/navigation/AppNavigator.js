@@ -6,7 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Profile from '../Profile';
 import Home from '../Home';
 
-import homeIcon from '../..//assets/ic_home/ic_home.png';
+import homeIcon from '../../assets/ic_home/ic_home.png';
 import settingsIcon from '../../assets/ic_settings/ic_settings.png';
 import Colors from '../../helpers/Colors';
 
