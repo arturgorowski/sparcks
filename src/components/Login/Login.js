@@ -29,7 +29,7 @@ function Login(props) {
 
 
     useEffect(() => {
-        if (user !== null) {
+        if (user !== null ) {
             props.navigation.navigate('App');
         }
     });

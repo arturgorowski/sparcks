@@ -33,9 +33,9 @@ const userRequest = () => ({
     type: actionTypes.USER_REQUEST,
 });
 
-const userSuccess = userLogged => ({
+const userSuccess = user => ({
     type: actionTypes.USER_SUCCESS,
-    userLogged,
+    user,
 });
 
 const userError = error => ({
@@ -47,6 +47,7 @@ export const login = (username, password) => async (dispatch) => {
     dispatch(loginRequest());
     try {
         const user = await UserController.login(username, password);
+        console.log('UserAction login(): ', user);
         dispatch(loginSuccess(user));
     } catch (error) {
         dispatch(loginError(error.message));
@@ -57,6 +58,7 @@ export const loggedInUser = (access_token, userId) => async (dispatch) => {
     dispatch(userRequest());
     try {
         const userLogged = await UserController.loggedInUser(access_token, userId);
+        console.log('UserAction userLogged(): ', userLogged);
         dispatch(userSuccess(userLogged));
     } catch (error) {
         dispatch(userError(error.message));

@@ -7,18 +7,22 @@ import styles from './styles';
 import TextStyles from '../../helpers/TextStyles';
 import strings from '../../localization';
 import getUser from '../../selectors/UserSelectors';
+import {loggedInUser, actionTypes} from '../../actions/UserActions';
 
 function Home() {
 
     const user = useSelector(state => getUser(state));
-    console.log('user', user);
-    const getName = useCallback(() => `${user && user.firstName}`, [user]);
 
+    const dispatch = useDispatch();
+    // const loggedUser = useCallback(() => dispatch(loggedInUser(user.id, user.userId)), [access_token, userId, dispatch]);
+
+    // useEffect(() => {
+    //     loggedUser();
+    // });
 
     return (
         <View style={styles.container}>
             <Text style={TextStyles.lightTitle}>
-                {getName()}
             </Text>
             <Text>
             </Text>

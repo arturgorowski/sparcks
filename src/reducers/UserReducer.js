@@ -2,7 +2,6 @@ import {actionTypes} from '../actions/UserActions';
 
 const initialState = {
     user: null,
-    userLogged: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -23,7 +22,7 @@ const userReducer = (state = initialState, action) => {
         case actionTypes.USER_SUCCESS:
             return {
                 ...state,
-                userLogged: action.user,
+                user: action.user,
             };
         case actionTypes.LOGOUT:
             return initialState;

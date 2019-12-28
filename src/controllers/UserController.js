@@ -17,20 +17,22 @@ class UserController {
                     password: password,
                 },
             });
-            console.log('result.data: ', result.data);
-            if (result.data !== undefined) {
-                this.loggedInUser(result.data.id, result.data.userId)
-                    .then((response) => {
-                        console.log('logged user response: ', response);
-                        return response;
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        return Promise.reject(error);
-                    });
-            }
             //return console.log('UserController: ', result.data);
-            // return result.data;
+            // if (result.data !== undefined) {
+            //     this.loggedInUser(result.data.id, result.data.userId)
+            //         .then((response) => {
+            //             console.log('logged user response: ', response);
+            //             return response;
+            //         })
+            //         .catch((error) => {
+            //             console.log(error);
+            //             return Promise.reject(error);
+            //         });
+            // } else {
+            //     return result.data;
+            // }
+            console.log('UserController - login() - result.data: ', result.data);
+            return result.data;
             // Data is the object exposes by axios for the response json
         } catch (error) {
             return error;
@@ -46,7 +48,7 @@ class UserController {
                     access_token: access_token,
                 },
             });
-            // return console.log('zalogowany user: ', result.data);
+            console.log('UserController - loggedInUser() - result.data: ', result.data);
             return result.data;
         } catch (error) {
             return error;
