@@ -1,35 +1,53 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import getUser from '../../selectors/UserSelectors';
 import Colors from '../../helpers/Colors';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.white,
+    },
 });
 
-function AuthHandler(props) {
-  const user = useSelector(state => getUser(state));
-
-  useEffect(() => {
-    if (user !== null) {
-      props.navigation.navigate('App');
-    } else {
-      props.navigation.navigate('Auth');
+class AuthHandler extends Component {
+    constructor(props) {
+        super(props);
+        this.navigateWithAuth();
     }
-  });
 
-  return <View style={styles.container} />;
+    navigateWithAuth = async () => {
+        const {user, navigation} = this.props;
+        console.log(user);
+        if (user !== null) {
+            navigation.navigate('App');
+        } else {
+            navigation.navigate('Auth');
+        }
+    };
+
+    render() {
+        return (
+            <View style={styles.container}/>
+        );
+    }
 }
 
 AuthHandler.propTypes = {
-  navigation: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
 };
 
-export default AuthHandler;
+AuthHandler.defaultProps = {
+    user: null,
+};
+
+const mapStateToProps = state => ({
+    user: getUser(state),
+});
+
+export default connect(mapStateToProps)(AuthHandler);

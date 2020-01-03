@@ -10,10 +10,12 @@ import getUser from '../../selectors/UserSelectors';
 import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
+import {logout} from 'actions/UserActions';
 
 class Drawer extends Component {
     componentDidUpdate() {
         const {user, navigation} = this.props;
+        console.log('kurwa user', user);
         if (user === null) {
             navigation.navigate('Auth');
         }
