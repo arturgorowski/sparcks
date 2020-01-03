@@ -13,7 +13,7 @@ import errorsSelector from '../../selectors/ErrorSelectors';
 import {fullStatusSelector} from '../../selectors/StatusSelectors';
 import validate from '../../helpers/FormValidators';
 import strings from '../../localization';
-import {login, actionTypes} from '../../actions/UserActions';
+import {login, logout, actionTypes} from '../../actions/UserActions';
 
 class Login extends Component {
     static navigationOptions = {
@@ -34,12 +34,23 @@ class Login extends Component {
         validationError: false,
     };
 
+    componentDidMount(): void {
+        if (this.props.fullStatus.isLoading) {
+            this.props.logout();
+        }
+    }
+
+    componentDidUpdate() {
+        this.navigateToHomeIfLogged();
+        return null;
+    }
+
     usernameChanged = value => this.setState({username: value});
     passwordChanged = value => this.setState({password: value});
 
 
     navigateToHomeIfLogged = () => {
-        if (this.props.user !== null) {
+        if (this.props.user.user !== null) {
             this.props.navigation.navigate('App');
         }
     };

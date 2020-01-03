@@ -20,10 +20,11 @@ class AuthHandler extends Component {
         this.navigateWithAuth();
     }
 
-    navigateWithAuth = async () => {
+    navigateWithAuth = () => {
         const {user, navigation} = this.props;
-        console.log(user);
-        if (user !== null) {
+        console.log('user:', user.user);
+        console.log('navigation: ', navigation);
+        if (user.user !== null && user.user !== undefined) {
             navigation.navigate('App');
         } else {
             navigation.navigate('Auth');

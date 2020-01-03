@@ -1,4 +1,4 @@
-import {LOGIN_BASE_PATH} from 'react-native-dotenv';
+import {LOGIN_BASE_PATH, LOGOUT_BASE_PATH} from 'react-native-dotenv';
 import httpClient from './HttpClient';
 
 class UserController {
@@ -38,7 +38,15 @@ class UserController {
         }
     };
 
-    logout = () => null;
+    logout = async () => {
+        try {
+            await httpClient.post(`${LOGOUT_BASE_PATH}`);
+
+            return null;
+        } catch (error) {
+            throw error.response.data;
+        }
+    };
 }
 
 export default new UserController();

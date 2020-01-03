@@ -3,20 +3,19 @@ import PropTypes from 'prop-types';
 import {Image, Text, SafeAreaView, View, ScrollView, Platform, TouchableOpacity} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
 import {connect} from 'react-redux';
-import {API_URL} from 'react-native-dotenv';
 import {Divider, TouchableRipple} from 'react-native-paper';
 import getUser from '../../selectors/UserSelectors';
-// import {logout} from '../../redux/actions/user';
 import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
-import {logout} from 'actions/UserActions';
+import {logout} from '../../actions/UserActions';
 
 class Drawer extends Component {
     componentDidUpdate() {
         const {user, navigation} = this.props;
-        console.log('kurwa user', user);
-        if (user === null) {
+        console.log('user: ', user.user);
+        console.log('navigation: ', navigation.navigate);
+        if (user.user === null || user.user === undefined) {
             navigation.navigate('Auth');
         }
         return null;

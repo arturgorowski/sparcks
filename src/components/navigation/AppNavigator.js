@@ -5,7 +5,7 @@ import Home from '../Home';
 import Firefighters from '../Firefighters';
 import Colors from '../../helpers/Colors';
 import {createDrawerNavigator} from 'react-navigation-drawer';
-import strings from 'localization';
+import strings from '../../localization';
 
 const defaultNavigationOptions = {
     headerTintColor: (Platform.OS === 'android') ? Colors.primaryGrey : null,

@@ -1,4 +1,5 @@
 import UserController from '../controllers/UserController';
+import {globalReset} from '../actions/GlobalActions';
 
 export const actionTypes = {
     LOGIN: 'LOGIN',
@@ -7,6 +8,9 @@ export const actionTypes = {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
 
     LOGOUT: 'LOGOUT',
+    LOGOUT_REQUEST: 'LOGOUT_REQUEST',
+    LOGOUT_ERROR: 'LOGOUT_ERROR',
+
     USER_REQUEST: 'USER_REQUEST',
     USER_ERROR: 'USER_ERROR',
     USER_SUCCESS: 'USER_SUCCESS',
@@ -26,8 +30,13 @@ const loginSuccess = user => ({
     user,
 });
 
-const logoutRequest = () => ({
-    type: actionTypes.LOGOUT,
+export const logoutRequest = () => ({
+    type: actionTypes.LOGOUT_REQUEST,
+});
+
+export const logoutError = error => ({
+    type: actionTypes.LOGOUT_ERROR,
+    error,
 });
 
 const userSuccess = user => ({
@@ -50,7 +59,12 @@ export const login = (username, password) => async (dispatch) => {
     }
 };
 
-export const logout = () => (dispatch) => {
-    UserController.logout();
+export const logout = () => async (dispatch) => {
     dispatch(logoutRequest());
+    try {
+        await UserController.logout();
+        dispatch(globalReset());
+    } catch (error) {
+        dispatch(logoutError(error.message));
+    }
 };
