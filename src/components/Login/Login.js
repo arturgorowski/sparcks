@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {View, Image, StatusBar} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import React, {Component} from 'react';
+import {Image, StatusBar, KeyboardAvoidingView} from 'react-native';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Button from '../common/Button';
 import TextField from '../common/TextField';
@@ -10,62 +10,121 @@ import styles from './styles';
 
 import getUser from '../../selectors/UserSelectors';
 import errorsSelector from '../../selectors/ErrorSelectors';
-import {isLoadingSelector} from '../../selectors/StatusSelectors';
+import {fullStatusSelector} from '../../selectors/StatusSelectors';
+import validate from '../../helpers/FormValidators';
 import strings from '../../localization';
 import {login, actionTypes} from '../../actions/UserActions';
 
-function Login(props) {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+class Login extends Component {
+    static navigationOptions = {
+        header: null,
+    };
 
-    const user = useSelector(state => getUser(state));
-    const isLoading = useSelector(state => isLoadingSelector([actionTypes.LOGIN], state));
-    const errors = useSelector(state => errorsSelector([actionTypes.LOGIN], state));
+    constructor(props) {
+        super(props);
+        this.navigateToHomeIfLogged();
+    }
 
-    const dispatch = useDispatch();
-    const loginUser = useCallback(() => dispatch(login(username, password)), [username, password, dispatch]);
-    const passwordChanged = useCallback(value => setPassword(value), []);
-    const usernameChanged = useCallback(value => setUsername(value), []);
+    state = {
+        username: '',
+        password: '',
+        errors: {
+            username: null, password: null,
+        },
+        validationError: false,
+    };
+
+    usernameChanged = value => this.setState({username: value});
+    passwordChanged = value => this.setState({password: value});
 
 
-    useEffect(() => {
-        if (user !== null ) {
-            props.navigation.navigate('App');
+    navigateToHomeIfLogged = () => {
+        if (this.props.user !== null) {
+            this.props.navigation.navigate('App');
         }
-    });
+    };
 
-    return (
-        <View style={styles.container}>
-            <StatusBar backgroundColor="#ffffff" barStyle="dark-content"/>
-            <Image style={styles.logo} source={require('../../assets/logo/sparcks.png')}/>
-            <TextField
-                placeholder={strings.username}
-                onChangeText={usernameChanged}
-                value={username}
-                returnKeyType="next"
-            />
-            <TextField
-                placeholder={strings.password}
-                value={password}
-                onChangeText={passwordChanged}
-                secureTextEntry
-                returnKeyType="go"
-            />
-            <ErrorView errors={errors}/>
-            <Button
-                onPress={loginUser}
-                title={isLoading ? strings.loading : strings.login}
-            />
-        </View>
-    );
+    login = () => {
+        this.props.login(this.state.username, this.state.password)
+            .then(() => {
+                const {errors} = this.props;
+                if (!errors.length) {
+                    this.props.navigation.navigate('App');
+                }
+            });
+    };
+
+    validateData = (fieldName) => {
+        const {errors} = this.state;
+
+        errors[fieldName] = validate(fieldName, this.state[fieldName]);
+        const validationError = Boolean(Object.values(errors).filter(error => error).length);
+
+        this.setState({
+            errors, validationError,
+        });
+    };
+
+    render() {
+        const {fullStatus, errors} = this.props;
+        return (
+            <KeyboardAvoidingView style={styles.container}>
+                <StatusBar backgroundColor="#ffffff" barStyle="dark-content"/>
+                <Image style={styles.logo} source={require('../../assets/logo/sparcks.png')}/>
+                <TextField
+                    placeholder={strings.username}
+                    autoCapitalize="none"
+                    value={this.state.username}
+                    error={this.state.errors.username}
+                    onChangeText={this.usernameChanged}
+                    onBlur={() => this.validateData('email')}
+                    returnKeyType="next"
+                />
+                <TextField
+                    placeholder={strings.password}
+                    autoCapitalize="none"
+                    value={this.state.password}
+                    onChangeText={this.passwordChanged}
+                    onBlur={() => this.validateData('password')}
+                    secureTextEntry
+                    returnKeyType="go"
+                />
+                <ErrorView errors={errors}/>
+                <Button
+                    disabled={fullStatus.isLoading || !this.state.username.length || !this.state.password.length}
+                    onPress={this.login}
+                    title={fullStatus.isLoading ? strings.loading : strings.login}
+                />
+            </KeyboardAvoidingView>
+        );
+    }
+
 }
 
-Login.navigationOptions = {
-    header: null,
-};
 
 Login.propTypes = {
+    login: PropTypes.func.isRequired,
     navigation: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    fullStatus: PropTypes.object.isRequired,
+    errors: PropTypes.array,
 };
 
-export default Login;
+Login.defaultProps = {
+    user: null,
+    errors: [],
+};
+
+const mapStateToProps = state => ({
+    user: getUser(state),
+    fullStatus: fullStatusSelector([actionTypes.LOGIN], state),
+    errors: errorsSelector([actionTypes.LOGIN], state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    login: (username, password) => dispatch(login(username, password)),
+    logout: () => dispatch(logout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+

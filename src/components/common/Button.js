@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.primaryBlue,
         marginTop: 10,
         marginLeft: 30,
         marginRight: 30,

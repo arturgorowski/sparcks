@@ -1,37 +1,36 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {Component} from 'react';
 import {View, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-
 import styles from './styles';
-
 import TextStyles from '../../helpers/TextStyles';
 import strings from '../../localization';
-import getUser from '../../selectors/UserSelectors';
-import {loggedInUser, actionTypes} from '../../actions/UserActions';
+import {connect} from 'react-redux';
+import DrawerMenuButton from '../common/DrawerMenuButton';
 
-function Home() {
 
-    const user = useSelector(state => getUser(state));
+class Home extends Component {
+    static navigationOptions = ({navigation}) => ({
+        headerTitle: strings.home,
+        headerLeft: (
+            <DrawerMenuButton navigation={navigation} />
+        ),
+    });
 
-    const dispatch = useDispatch();
-    // const loggedUser = useCallback(() => dispatch(loggedInUser(user.id, user.userId)), [access_token, userId, dispatch]);
 
-    // useEffect(() => {
-    //     loggedUser();
-    // });
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={TextStyles.lightTitle}>
+                </Text>
+                <Text>
+                </Text>
+            </View>
+        );
+    }
 
-    return (
-        <View style={styles.container}>
-            <Text style={TextStyles.lightTitle}>
-            </Text>
-            <Text>
-            </Text>
-        </View>
-    );
 }
 
-Home.navigationOptions = {
-    title: strings.home,
-};
+const mapStateToProps = state => ({});
 
-export default Home;
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
