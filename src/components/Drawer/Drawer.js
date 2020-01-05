@@ -13,9 +13,8 @@ import {logout} from '../../actions/UserActions';
 class Drawer extends Component {
     componentDidUpdate() {
         const {user, navigation} = this.props;
-        console.log('user: ', user.user);
-        console.log('navigation: ', navigation.navigate);
-        if (user.user === null || user.user === undefined) {
+        console.log('user: ', user);
+        if (user === null) {
             navigation.navigate('Auth');
         }
         return null;
@@ -23,6 +22,7 @@ class Drawer extends Component {
 
     logout = () => {
         this.props.logout();
+        this.props.navigation.navigate('Auth');
     };
 
     _renderLogoutBtnContainer = () => (
@@ -66,7 +66,7 @@ class Drawer extends Component {
                                 {/*</View>*/}
 
                                 <Text style={styles.headerName}>
-                                    {`${user.first_name} ${user.last_name}`}
+                                    {`${user.firstName} ${user.lastName}`}
                                 </Text>
                                 <Text style={styles.headerLogin}>
                                     {user.username}

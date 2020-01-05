@@ -50,7 +50,7 @@ class Login extends Component {
 
 
     navigateToHomeIfLogged = () => {
-        if (this.props.user.user !== null) {
+        if (this.props.user !== null) {
             this.props.navigation.navigate('App');
         }
     };
