@@ -6,7 +6,7 @@ import NetInfo from '@react-native-community/netinfo';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Navigation from './components/navigation';
 import Colors from './helpers/Colors';
-import {store, persist} from './reducers';
+import {store, persist} from './redux/reducers';
 import LoadingIndicator from './components/common/LoadingIndicator';
 import strings from './localization';
 import {styles, theme} from './styles';

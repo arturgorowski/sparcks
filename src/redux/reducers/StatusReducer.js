@@ -1,5 +1,5 @@
-import { actionTypes } from '/home/artur/praca_inż/sparcks/src/actions/GlobalActions';
-import { NOT_STARTED, LOADING, SUCCESS, ERROR } from '../helpers/Status';
+import { actionTypes } from '/home/artur/praca_inż/sparcks/src/redux/actions/global/actions';
+import { NOT_STARTED, LOADING, SUCCESS, ERROR } from 'helpers/Status';
 
 export default (state = {}, action) => {
   const { type } = action;

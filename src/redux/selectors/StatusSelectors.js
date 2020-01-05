@@ -1,4 +1,4 @@
-import { LOADING, NOT_STARTED, ERROR, SUCCESS } from '../helpers/Status';
+import { LOADING, NOT_STARTED, ERROR, SUCCESS } from 'helpers/Status';
 
 export const statusSelector = (
   action,

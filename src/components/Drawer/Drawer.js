@@ -4,17 +4,19 @@ import {Image, Text, SafeAreaView, View, ScrollView, Platform, TouchableOpacity}
 import {DrawerItems} from 'react-navigation-drawer';
 import {connect} from 'react-redux';
 import {Divider, TouchableRipple} from 'react-native-paper';
-import getUser from '../../selectors/UserSelectors';
+import getUser from '../../redux/selectors/UserSelectors';
 import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
-import {logout} from '../../actions/UserActions';
+import {logout} from '../../redux/actions/user';
 
 class Drawer extends Component {
     componentDidUpdate() {
         const {user, navigation} = this.props;
-        console.log('user: ', user);
-        if (user === null) {
+        console.log('user Drawer: ', user);
+        console.log('Drawer.js user !== null: ', user !== null);
+        console.log('----------------------------');
+        if (user !== null) {
             navigation.navigate('Auth');
         }
         return null;
@@ -22,7 +24,6 @@ class Drawer extends Component {
 
     logout = () => {
         this.props.logout();
-        this.props.navigation.navigate('Auth');
     };
 
     _renderLogoutBtnContainer = () => (

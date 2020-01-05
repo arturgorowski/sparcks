@@ -3,17 +3,17 @@ import {Image, StatusBar, KeyboardAvoidingView} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import Button from '../common/Button';
-import TextField from '../common/TextField';
-import ErrorView from '../common/ErrorView';
+import Button from 'components/common/Button';
+import TextField from 'components/common/TextField';
+import ErrorView from 'components/common/ErrorView';
 import styles from './styles';
 
-import getUser from '../../selectors/UserSelectors';
-import errorsSelector from '../../selectors/ErrorSelectors';
-import {fullStatusSelector} from '../../selectors/StatusSelectors';
-import validate from '../../helpers/FormValidators';
-import strings from '../../localization';
-import {login, logout, actionTypes} from '../../actions/UserActions';
+import getUser from '../../redux/selectors/UserSelectors';
+import errorsSelector from '../../redux/selectors/ErrorSelectors';
+import {fullStatusSelector} from '../../redux/selectors/StatusSelectors';
+import validate from 'helpers/FormValidators';
+import strings from 'localization/index';
+import {login, logout, actionTypes} from '../../redux/actions/user';
 
 class Login extends Component {
     static navigationOptions = {
@@ -50,8 +50,15 @@ class Login extends Component {
 
 
     navigateToHomeIfLogged = () => {
-        if (this.props.user !== null) {
-            this.props.navigation.navigate('App');
+        //console.log('navigateToHomeIfLogged - Login.js: ', this.props.user);
+        const {user, navigation} = this.props;
+        console.log('Login.js user !== null: ', user !== null);
+        console.log('Login.js user: ', user);
+        console.log('Login.js user.length: ', user.length);
+        console.log('----------------------------');
+
+        if (user !== null) {
+            navigation.navigate('App');
         }
     };
 
@@ -81,7 +88,7 @@ class Login extends Component {
         return (
             <KeyboardAvoidingView style={styles.container}>
                 <StatusBar backgroundColor="#ffffff" barStyle="dark-content"/>
-                <Image style={styles.logo} source={require('../../assets/logo/sparcks.png')}/>
+                <Image style={styles.logo} source={require('assets/logo/sparcks.png')}/>
                 <TextField
                     placeholder={strings.username}
                     autoCapitalize="none"

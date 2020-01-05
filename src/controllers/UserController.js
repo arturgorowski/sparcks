@@ -13,7 +13,9 @@ class UserController {
                 },
             );
 
-            console.log('UserController - login() - token.data: ', token.data);
+            console.log('UserController.login() - token.data: ', token.data);
+            console.log('----------------------------');
+
             return token.data;
             // Data is the object exposes by axios for the response json
         } catch (error) {
@@ -21,7 +23,7 @@ class UserController {
         }
     };
 
-    loggedInUser = async (access_token, userId) => {
+    getUser = async (access_token, userId) => {
         try {
             let user = await httpClient.get(
                 `firefighters/${userId}`,
@@ -31,7 +33,9 @@ class UserController {
                     },
                 },
             );
-            console.log('UserController - loggedInUser() - result.data: ', user.data);
+            console.log('UserController.getUser() - user.data: ', user.data);
+            console.log('----------------------------');
+
             return user.data;
         } catch (error) {
             throw error.response.data;

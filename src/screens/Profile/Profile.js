@@ -3,13 +3,13 @@ import {View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Button from '../common/Button';
+import Button from 'components/common/Button';
 import styles from './styles';
 
 import strings from 'localization';
 import TextStyles from 'helpers/TextStyles';
-import { logout } from 'actions/UserActions';
-import getUser from 'selectors/UserSelectors';
+import { logout } from 'redux/actions/user/actions';
+import getUser from 'redux/selectors/UserSelectors';
 
 function Profile(props) {
   const user = useSelector(state => getUser(state));
