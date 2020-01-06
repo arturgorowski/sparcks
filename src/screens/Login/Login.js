@@ -124,6 +124,7 @@ class Login extends Component {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
     navigation: PropTypes.object.isRequired,
     user: PropTypes.object,
     token: PropTypes.object,

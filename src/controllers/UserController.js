@@ -36,11 +36,7 @@ class UserController {
 
     logout = async () => {
         try {
-            await httpClient({
-                method: 'post',
-                url: `${LOGOUT_BASE_PATH}`,
-            });
-
+            await httpClient.post(`${LOGOUT_BASE_PATH}`);
             return null;
         } catch (error) {
             throw error;

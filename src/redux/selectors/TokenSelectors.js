@@ -1,1 +1,1 @@
-export default state => state.token.token;
+export default state => state.token;

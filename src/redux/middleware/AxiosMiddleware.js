@@ -1,6 +1,5 @@
 import client from '../../controllers/HttpClient';
 import {globalReset} from '../actions/global';
-import strings from '../../localization';
 
 export default ({dispatch}) => next => async (action) => {
     client.interceptors.response.use(null, (error) => {
