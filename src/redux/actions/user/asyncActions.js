@@ -9,16 +9,15 @@ export const login = (username, password) => async (dispatch) => {
     try {
         const token = await UserController.login(username, password);
         dispatch(saveToken(token));
-        console.log('UserAction token: ', token);
-        console.log('----------------------------');
+        console.log('-------------------------------------------------------asyncActions.js----------------');
+        console.log('token: ', token);
 
-
-        const data = await UserController.getUser(token.id, token.userId);
-        console.log('UserAction loggedUser(): ', data);
-        console.log('----------------------------');
-
-        const {user} = data;
-        dispatch(loginSuccess(user));
+        if (token !== null) {
+            const user = await UserController.getUser(token.userId);
+            console.log('-------------------------------------------------------asyncActions.js----------------');
+            console.log('loggedUser(): ', user);
+            dispatch(loginSuccess(user));
+        }
 
     } catch (error) {
         dispatch(loginError(error.message));

@@ -9,6 +9,7 @@ import ErrorView from 'components/common/ErrorView';
 import styles from './styles';
 
 import getUser from '../../redux/selectors/UserSelectors';
+import getToken from '../../redux/selectors/TokenSelectors';
 import errorsSelector from '../../redux/selectors/ErrorSelectors';
 import {fullStatusSelector} from '../../redux/selectors/StatusSelectors';
 import validate from 'helpers/FormValidators';
@@ -51,13 +52,13 @@ class Login extends Component {
 
     navigateToHomeIfLogged = () => {
         //console.log('navigateToHomeIfLogged - Login.js: ', this.props.user);
-        const {user, navigation} = this.props;
+        const {user, navigation, token} = this.props;
+        console.log('-------------------------------------------------------LOGIN.JS-------------');
         console.log('Login.js user !== null: ', user !== null);
         console.log('Login.js user: ', user);
-        console.log('Login.js user.length: ', user.length);
-        console.log('----------------------------');
+        console.log('Login.js token: ', token);
 
-        if (user !== null) {
+        if (token !== null) {
             navigation.navigate('App');
         }
     };
@@ -66,6 +67,7 @@ class Login extends Component {
         this.props.login(this.state.username, this.state.password)
             .then(() => {
                 const {errors} = this.props;
+                console.log('errors Login.js: ', errors);
                 if (!errors.length) {
                     this.props.navigation.navigate('App');
                 }
@@ -95,7 +97,7 @@ class Login extends Component {
                     value={this.state.username}
                     error={this.state.errors.username}
                     onChangeText={this.usernameChanged}
-                    onBlur={() => this.validateData('email')}
+                    onBlur={() => this.validateData('username')}
                     returnKeyType="next"
                 />
                 <TextField
@@ -124,17 +126,20 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
     navigation: PropTypes.object.isRequired,
     user: PropTypes.object,
+    token: PropTypes.object,
     fullStatus: PropTypes.object.isRequired,
     errors: PropTypes.array,
 };
 
 Login.defaultProps = {
     user: null,
+    token: null,
     errors: [],
 };
 
 const mapStateToProps = state => ({
     user: getUser(state),
+    token: getToken(state),
     fullStatus: fullStatusSelector([actionTypes.LOGIN], state),
     errors: errorsSelector([actionTypes.LOGIN], state),
 });

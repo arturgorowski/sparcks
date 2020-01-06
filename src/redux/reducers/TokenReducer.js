@@ -1,6 +1,6 @@
 import {actionTypes} from '../actions/token';
 
-const initialState = null;
+const initialState = {token: null};
 
 const tokenReducer = (state = initialState, action) => {
     switch (action.type) {

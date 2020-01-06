@@ -1,8 +1,11 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack';
 import Drawer from '../Drawer';
-import Home from '../../screens/Home';
+import Alarm from '../../screens/Alarm';
 import Firefighters from '../../screens/Firefighters';
+import Home from '../../screens/Home';
+import Hydrants from '../../screens/Hydrants';
+import Maps from '../../screens/Maps';
 import Colors from '../../helpers/Colors';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import strings from '../../localization';
@@ -18,8 +21,11 @@ const createCustomStackNavigator = component => createStackNavigator(
     {defaultNavigationOptions},
 );
 
-const HomeStack = createCustomStackNavigator(Home);
+const AlarmStack = createCustomStackNavigator(Alarm);
 const FirefightersStack = createCustomStackNavigator(Firefighters);
+const HomeStack = createCustomStackNavigator(Home);
+const HydrantsStack = createCustomStackNavigator(Hydrants);
+const MapsStack = createCustomStackNavigator(Maps);
 
 const AppStack = createDrawerNavigator(
     {
@@ -29,11 +35,29 @@ const AppStack = createDrawerNavigator(
             },
             screen: HomeStack,
         },
+        Alarm: {
+            navigationOptions: {
+                drawerLabel: strings.alarm,
+            },
+            screen: AlarmStack,
+        },
         Firefighters: {
             navigationOptions: {
                 drawerLabel: strings.firefighters,
             },
             screen: FirefightersStack,
+        },
+        Hydrants: {
+            navigationOptions: {
+                drawerLabel: strings.hydrants,
+            },
+            screen: HydrantsStack,
+        },
+        Maps: {
+            navigationOptions: {
+                drawerLabel: strings.maps,
+            },
+            screen: MapsStack,
         },
     },
     {

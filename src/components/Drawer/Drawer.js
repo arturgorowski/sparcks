@@ -5,6 +5,7 @@ import {DrawerItems} from 'react-navigation-drawer';
 import {connect} from 'react-redux';
 import {Divider, TouchableRipple} from 'react-native-paper';
 import getUser from '../../redux/selectors/UserSelectors';
+import getToken from '../../redux/selectors/TokenSelectors';
 import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
@@ -12,11 +13,13 @@ import {logout} from '../../redux/actions/user';
 
 class Drawer extends Component {
     componentDidUpdate() {
-        const {user, navigation} = this.props;
+        const {user, navigation, token} = this.props;
+        console.log('--------------DRAWER.JS--------------');
         console.log('user Drawer: ', user);
-        console.log('Drawer.js user !== null: ', user !== null);
-        console.log('----------------------------');
-        if (user !== null) {
+        console.log('token Drawer: ', token);
+        console.log('Drawer.js user === null: ', user === null);
+        console.log('Drawer.js token === null: ', token === null);
+        if (token === null) {
             navigation.navigate('Auth');
         }
         return null;
@@ -123,15 +126,17 @@ Drawer.propTypes = {
 
 Drawer.defaultProps = {
     user: null,
+    token: null,
 };
 
 
 const mapStateToProps = state => ({
     user: getUser(state),
+    token: getToken(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-    logout: () => dispatch(logout()),
+    logout: (ac) => dispatch(logout(ac)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drawer);

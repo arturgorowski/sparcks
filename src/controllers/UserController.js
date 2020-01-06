@@ -12,43 +12,38 @@ class UserController {
                     password: password,
                 },
             );
-
-            console.log('UserController.login() - token.data: ', token.data);
-            console.log('----------------------------');
-
+            console.log('-------------------------------------------------------UserController.js---------------');
+            console.log('login() - token.data: ', token.data);
             return token.data;
             // Data is the object exposes by axios for the response json
         } catch (error) {
-            throw error.response.data;
+            // console.log('error UserController login: ', error);
+            throw error.response.data.error.code;
         }
     };
 
-    getUser = async (access_token, userId) => {
+    getUser = async (userId) => {
         try {
-            let user = await httpClient.get(
-                `firefighters/${userId}`,
-                {
-                    params: {
-                        access_token: access_token,
-                    },
-                },
-            );
-            console.log('UserController.getUser() - user.data: ', user.data);
-            console.log('----------------------------');
-
+            let user = await httpClient.get(`firefighters/${userId}`);
+            console.log('-------------------------------------------------------UserController.js---------------');
+            console.log('getUser() - user.data: ', user.data);
             return user.data;
         } catch (error) {
-            throw error.response.data;
+            // console.log('error UserController getUser: ', error);
+            throw error;
         }
     };
 
     logout = async () => {
         try {
-            await httpClient.post(`${LOGOUT_BASE_PATH}`);
+            await httpClient({
+                method: 'post',
+                url: `${LOGOUT_BASE_PATH}`,
+            });
 
             return null;
         } catch (error) {
-            throw error.response.data;
+            throw error;
         }
     };
 }
