@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import {Image, Text, SafeAreaView, View, ScrollView, Platform, TouchableOpacity} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
 import {connect} from 'react-redux';
-import {API_URL} from 'react-native-dotenv';
 import {Divider, TouchableRipple} from 'react-native-paper';
-import getUser from '../../selectors/UserSelectors';
-// import {logout} from '../../redux/actions/user';
+import getUser from '../../redux/selectors/UserSelectors';
+import getToken from '../../redux/selectors/TokenSelectors';
 import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
-import {logout} from 'actions/UserActions';
+import {logout} from '../../redux/actions/user';
 
 class Drawer extends Component {
     componentDidUpdate() {
-        const {user, navigation} = this.props;
-        console.log('kurwa user', user);
-        if (user === null) {
+        const {user, navigation, token} = this.props;
+        console.log('--------------DRAWER.JS--------------');
+        console.log('user Drawer: ', user);
+        console.log('token Drawer: ', token);
+        console.log('Drawer.js user === null: ', user === null);
+        console.log('Drawer.js token === null: ', token === null);
+        if (token === null) {
             navigation.navigate('Auth');
         }
         return null;
@@ -67,7 +70,7 @@ class Drawer extends Component {
                                 {/*</View>*/}
 
                                 <Text style={styles.headerName}>
-                                    {`${user.first_name} ${user.last_name}`}
+                                    {`${user.firstName} ${user.lastName}`}
                                 </Text>
                                 <Text style={styles.headerLogin}>
                                     {user.username}
@@ -123,11 +126,13 @@ Drawer.propTypes = {
 
 Drawer.defaultProps = {
     user: null,
+    token: null,
 };
 
 
 const mapStateToProps = state => ({
     user: getUser(state),
+    token: getToken(state),
 });
 
 const mapDispatchToProps = dispatch => ({

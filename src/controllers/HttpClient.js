@@ -17,17 +17,17 @@ const client = axios.create({
 
 // Custom middleware for requests (this one just logs the error).
 client.interceptors.request.use(config => config, (error) => {
-    console.log('Failed to make request with error: ', error);
+    //console.log('Failed to make request with error: ', error);
     return Promise.reject(error);
 });
 
 // Custom middleware for responses (this one just logs the error).
-client.interceptors.response.use((response) => {
-    console.log('Response: ', response);
-    return Promise.resolve(response);
-}, (error) => {
-    console.log('Request got response with error: ', error);
-    return Promise.reject(error);
-});
+// client.interceptors.response.use((response) => {
+//     console.log('Response: ', response);
+//     return Promise.resolve(response);
+// }, (error) => {
+//     console.log('Request got response with error: ', error);
+//     return Promise.reject(error);
+// });
 
 export default client;

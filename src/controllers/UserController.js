@@ -1,4 +1,4 @@
-import {LOGIN_BASE_PATH} from 'react-native-dotenv';
+import {LOGIN_BASE_PATH, LOGOUT_BASE_PATH} from 'react-native-dotenv';
 import httpClient from './HttpClient';
 
 class UserController {
@@ -12,33 +12,36 @@ class UserController {
                     password: password,
                 },
             );
-
-            console.log('UserController - login() - token.data: ', token.data);
+            console.log('-------------------------------------------------------UserController.js---------------');
+            console.log('login() - token.data: ', token.data);
             return token.data;
             // Data is the object exposes by axios for the response json
         } catch (error) {
-            throw error.response.data;
+            // console.log('error UserController login: ', error);
+            throw error.response.data.error.code;
         }
     };
 
-    loggedInUser = async (access_token, userId) => {
+    getUser = async (userId) => {
         try {
-            let user = await httpClient.get(
-                `firefighters/${userId}`,
-                {
-                    params: {
-                        access_token: access_token,
-                    },
-                },
-            );
-            console.log('UserController - loggedInUser() - result.data: ', user.data);
+            let user = await httpClient.get(`firefighters/${userId}`);
+            console.log('-------------------------------------------------------UserController.js---------------');
+            console.log('getUser() - user.data: ', user.data);
             return user.data;
         } catch (error) {
-            throw error.response.data;
+            // console.log('error UserController getUser: ', error);
+            throw error;
         }
     };
 
-    logout = () => null;
+    logout = async () => {
+        try {
+            await httpClient.post(`${LOGOUT_BASE_PATH}`);
+            return null;
+        } catch (error) {
+            throw error;
+        }
+    };
 }
 
 export default new UserController();
