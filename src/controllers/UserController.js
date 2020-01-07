@@ -17,8 +17,7 @@ class UserController {
             return token.data;
             // Data is the object exposes by axios for the response json
         } catch (error) {
-            // console.log('error UserController login: ', error);
-            throw error.response.data.error.code;
+            throw error.response.data.error;
         }
     };
 

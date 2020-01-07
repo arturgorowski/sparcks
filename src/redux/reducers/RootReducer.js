@@ -12,10 +12,9 @@ const combineReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-    // if (action.type === 'GLOBAL_RESET') {
-    //     const {settings} = state;
-    //     state = {settings: {...settings}};
-    // }
+    if (action.type === 'GLOBAL_RESET') {
+        return {}
+    }
     return combineReducer(state, action);
 };
 

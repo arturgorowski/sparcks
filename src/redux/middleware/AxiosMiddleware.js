@@ -22,7 +22,7 @@ export default ({dispatch}) => next => async (action) => {
             // );
             if (error.response.data.error.code === 'LOGIN_FAILED') {
                 dispatch(globalReset());
-                throw new Error('Username or password is incorrect');
+                // throw new Error('Username or password is incorrect');
             } else {
                 dispatch(globalReset());
                 throw new Error('Unauthorized');
