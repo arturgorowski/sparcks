@@ -64,7 +64,6 @@ const AppStack = createDrawerNavigator(
         contentComponent: Drawer,
         drawerWidth: 300,
         useNativeAnimations: true,
-        drawerType: 'slide',
     },
 );
 
