@@ -11,6 +11,7 @@ export default {
     hydrants: 'Hydrants',
     homeMessage: 'Welcome',
     profile: 'Profile',
+    firestation: 'Fire station',
     profileMessage: 'And this one has a nav, but with a different color than the login.',
     logout: 'Logout',
     firefighters: 'Firefighters',

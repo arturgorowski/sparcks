@@ -10,6 +10,7 @@ import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
 import {logout} from '../../redux/actions/user';
+import LogoutIcon from '../../assets/menu/logout.svg';
 
 class Drawer extends Component {
     componentDidUpdate() {
@@ -31,6 +32,11 @@ class Drawer extends Component {
 
     _renderLogoutBtnContainer = () => (
         <View style={styles.logoutBtnContainer}>
+            <LogoutIcon
+                width={24}
+                height={24}
+                style={styles.logoutIcon}
+            />
             <Text
                 style={[
                     styles.menuItemText,

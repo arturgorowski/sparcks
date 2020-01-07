@@ -8,10 +8,12 @@ import PropTypes from 'prop-types';
 import DrawerMenuButton from 'components/common/DrawerMenuButton';
 import getUser from '../../redux/selectors/UserSelectors';
 import getToken from '../../redux/selectors/TokenSelectors';
+import getFirestation from '../../redux/selectors/FirestationSelectors';
+import {getUserFirestation} from '../../redux/actions/firestation';
 
-class Home extends Component {
+class Firestation extends Component {
     static navigationOptions = ({navigation}) => ({
-        headerTitle: strings.home,
+        headerTitle: strings.firestation,
         headerLeft: (
             <DrawerMenuButton navigation={navigation}/>
         ),
@@ -19,27 +21,26 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.wtf();
+        this.loggedUser();
     }
 
-    wtf() {
-        const {user, token} = this.props;
-        console.log('home user', user);
-        console.log('home token', token);
-        console.log('home: user !== null', user !== null);
-        console.log('home: token !== null', token !== null);
+    loggedUser() {
+        const {user} = this.props;
+        console.log('firestation user', user);
+        if (user) {
+            console.log('Firestation: ', user.fireStationId);
+            this.props.getUserFirestation(user.fireStationId);
+        }
     }
 
     render() {
-        const {user} = this.props;
-        if (user) {
+        const {firestation} = this.props;
+        console.log('Firestation: ', firestation);
+        if (firestation) {
             return (
                 <View style={styles.container}>
                     <Text style={TextStyles.lightTitle}>
-                        This is Home Screen
-                    </Text>
-                    <Text>
-                        {user.firstName}
+                        {firestation.name}
                     </Text>
                 </View>
             );
@@ -49,22 +50,28 @@ class Home extends Component {
 
 }
 
-Home.propTypes = {
+Firestation.propTypes = {
     user: PropTypes.object,
     token: PropTypes.object,
+    firestation: PropTypes.object,
     navigation: PropTypes.object.isRequired,
+    getUserFirestation: PropTypes.func.isRequired,
 };
 
-Home.defaultProps = {
+Firestation.defaultProps = {
     user: null,
     token: null,
+    firestation: null,
 };
 
 const mapStateToProps = state => ({
     user: getUser(state),
     token: getToken(state),
+    firestation: getFirestation(state),
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    getUserFirestation: (id) => dispatch(getUserFirestation(id)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Firestation);

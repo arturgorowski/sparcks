@@ -3,7 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Drawer from '../Drawer';
 import Alarm from '../../screens/Alarm';
 import Firefighters from '../../screens/Firefighters';
-import Home from '../../screens/Home';
+import Firestation from '../../screens/Firestation';
 import Hydrants from '../../screens/Hydrants';
 import Maps from '../../screens/Maps';
 import Colors from '../../helpers/Colors';
@@ -23,17 +23,17 @@ const createCustomStackNavigator = component => createStackNavigator(
 
 const AlarmStack = createCustomStackNavigator(Alarm);
 const FirefightersStack = createCustomStackNavigator(Firefighters);
-const HomeStack = createCustomStackNavigator(Home);
+const FirestationStack = createCustomStackNavigator(Firestation);
 const HydrantsStack = createCustomStackNavigator(Hydrants);
 const MapsStack = createCustomStackNavigator(Maps);
 
 const AppStack = createDrawerNavigator(
     {
-        Home: {
+        Firestation: {
             navigationOptions: {
-                drawerLabel: strings.home,
+                drawerLabel: strings.firestation,
             },
-            screen: HomeStack,
+            screen: FirestationStack,
         },
         Alarm: {
             navigationOptions: {

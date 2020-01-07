@@ -11,6 +11,8 @@ import java.lang.reflect.InvocationTargetException;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.horcrux.svg.SvgPackage;
+
 
 
 import java.util.List;
