@@ -1,20 +1,20 @@
 export const actionTypes = {
     FIRESTATION: 'FIRESTATION',
-    FIRESTATION_REQUEST: 'FIRESTATION_REQUEST',
-    FIRESTATION_ERROR: 'FIRESTATION_ERROR',
-    FIRESTATION_SUCCESS: 'FIRESTATION_SUCCESS',
+    GET_FIRESTATION_REQUEST: 'FIRESTATION_REQUEST',
+    GET_FIRESTATION_ERROR: 'FIRESTATION_ERROR',
+    GET_FIRESTATION_SUCCESS: 'FIRESTATION_SUCCESS',
 };
 
 export const firestationRequest = () => ({
-    type: actionTypes.FIRESTATION_REQUEST,
+    type: actionTypes.GET_FIRESTATION_REQUEST,
 });
 
 export const firestationError = error => ({
-    type: actionTypes.FIRESTATION_ERROR,
+    type: actionTypes.GET_FIRESTATION_ERROR,
     error,
 });
 
-export const firestationSuccess = user => ({
-    type: actionTypes.FIRESTATION_SUCCESS,
-    user,
+export const firestationSuccess = firestation => ({
+    type: actionTypes.GET_FIRESTATION_SUCCESS,
+    firestation,
 });

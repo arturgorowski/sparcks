@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
-import TextStyles from 'helpers/TextStyles';
+import TextStyles from '../../helpers/TextStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import DrawerMenuButton from 'components/common/DrawerMenuButton';
-import getUser from '../../redux/selectors/UserSelectors';
-import getToken from '../../redux/selectors/TokenSelectors';
-import getFirestation from '../../redux/selectors/FirestationSelectors';
+import DrawerMenuButton from '../../components/common/DrawerMenuButton';
+import getUserState from '../../redux/selectors/UserSelectors';
+import getTokenState from '../../redux/selectors/TokenSelectors';
+import getFirestationState from '../../redux/selectors/FirestationSelectors';
 import {getUserFirestation} from '../../redux/actions/firestation';
 
 class Firestation extends Component {
@@ -21,17 +21,17 @@ class Firestation extends Component {
 
     constructor(props) {
         super(props);
-        this.loggedUser();
+        this.loggedUserFirestation();
     }
 
-    loggedUser() {
+    loggedUserFirestation = () => {
         const {user} = this.props;
         console.log('firestation user', user);
         if (user) {
-            console.log('Firestation: ', user.fireStationId);
+            console.log('Firestation id: ', user.fireStationId);
             this.props.getUserFirestation(user.fireStationId);
         }
-    }
+    };
 
     render() {
         const {firestation} = this.props;
@@ -65,9 +65,9 @@ Firestation.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-    user: getUser(state),
-    token: getToken(state),
-    firestation: getFirestation(state),
+    user: getUserState(state),
+    token: getTokenState(state),
+    firestation: getFirestationState(state),
 });
 
 const mapDispatchToProps = dispatch => ({

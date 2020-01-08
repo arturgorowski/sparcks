@@ -6,6 +6,7 @@ export const getUserFirestation = (id) => async (dispatch) => {
     console.log('geUserFirestation()');
     try {
         const data = await FirestationController.getUserFirestation(id);
+        console.log(data);
         dispatch(firestationSuccess(data));
 
     } catch (error) {
