@@ -12,6 +12,7 @@ export default {
     homeMessage: 'Welcome',
     profile: 'Profile',
     firestation: 'Fire station',
+    firetruck: 'Fire trucks',
     profileMessage: 'And this one has a nav, but with a different color than the login.',
     logout: 'Logout',
     firefighters: 'Firefighters',

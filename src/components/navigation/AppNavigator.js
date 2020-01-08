@@ -3,9 +3,11 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Drawer from '../Drawer';
 import Interventions from '../../screens/Interventions';
 import Firefighters from '../../screens/Firefighters';
-import Firestation from '../../screens/Firestation';
+import FireStation from '../../screens/FireStation';
 import Hydrants from '../../screens/Hydrants';
 import Maps from '../../screens/Maps';
+import Profile from '../../screens/Profile';
+import FireTruck from '../../screens/FireTrucks';
 import Colors from '../../helpers/Colors';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import strings from '../../localization';
@@ -23,29 +25,43 @@ const createCustomStackNavigator = component => createStackNavigator(
 
 const InterventionsStack = createCustomStackNavigator(Interventions);
 const FirefightersStack = createCustomStackNavigator(Firefighters);
-const FirestationStack = createCustomStackNavigator(Firestation);
+const FireStationStack = createCustomStackNavigator(FireStation);
 const HydrantsStack = createCustomStackNavigator(Hydrants);
 const MapsStack = createCustomStackNavigator(Maps);
+const ProfileStack = createCustomStackNavigator(Profile);
+const FireTruckStack = createCustomStackNavigator(FireTruck);
 
 const AppStack = createDrawerNavigator(
     {
-        Firestation: {
+        Profile: {
+            navigationOptions: {
+                drawerLabel: strings.profile,
+            },
+            screen: ProfileStack,
+        },
+        FireStation: {
             navigationOptions: {
                 drawerLabel: strings.firestation,
             },
-            screen: FirestationStack,
+            screen: FireStationStack,
         },
-        Interventions: {
+        FireTruck: {
             navigationOptions: {
-                drawerLabel: strings.interventions,
+                drawerLabel: strings.firetruck,
             },
-            screen: InterventionsStack,
+            screen: FireTruckStack,
         },
         Firefighters: {
             navigationOptions: {
                 drawerLabel: strings.firefighters,
             },
             screen: FirefightersStack,
+        },
+        Interventions: {
+            navigationOptions: {
+                drawerLabel: strings.interventions,
+            },
+            screen: InterventionsStack,
         },
         Hydrants: {
             navigationOptions: {

@@ -5,16 +5,16 @@ export const actionTypes = {
     GET_FIRESTATION_SUCCESS: 'FIRESTATION_SUCCESS',
 };
 
-export const firestationRequest = () => ({
+export const fireStationRequest = () => ({
     type: actionTypes.GET_FIRESTATION_REQUEST,
 });
 
-export const firestationError = error => ({
+export const fireStationError = error => ({
     type: actionTypes.GET_FIRESTATION_ERROR,
     error,
 });
 
-export const firestationSuccess = firestation => ({
+export const fireStationSuccess = fireStation => ({
     type: actionTypes.GET_FIRESTATION_SUCCESS,
-    firestation,
+    fireStation,
 });

@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import DrawerMenuButton from '../../components/common/DrawerMenuButton';
 import getUserState from '../../redux/selectors/UserSelectors';
 import getTokenState from '../../redux/selectors/TokenSelectors';
-import getFirestationState from '../../redux/selectors/FirestationSelectors';
-import {getUserFirestation} from '../../redux/actions/firestation';
+import getFireStationState from '../../redux/selectors/FireStationSelectors';
+import {getUserFirestation} from '../../redux/actions/fireStation';
 
-class Firestation extends Component {
+class FireStation extends Component {
     static navigationOptions = ({navigation}) => ({
         headerTitle: strings.firestation,
         headerLeft: (
@@ -21,26 +21,24 @@ class Firestation extends Component {
 
     constructor(props) {
         super(props);
-        this.loggedUserFirestation();
+        this.loggedUserFireStation();
     }
 
-    loggedUserFirestation = () => {
+    loggedUserFireStation = () => {
         const {user} = this.props;
-        console.log('firestation user', user);
         if (user) {
-            console.log('Firestation id: ', user.fireStationId);
-            this.props.getUserFirestation(user.fireStationId);
+            this.props.getUserFireStation(user.fireStationId);
         }
     };
 
     render() {
-        const {firestation} = this.props;
-        console.log('Firestation: ', firestation);
-        if (firestation) {
+        const {fireStation} = this.props;
+        console.log('fireStation: ', fireStation);
+        if (fireStation) {
             return (
                 <View style={styles.container}>
                     <Text style={TextStyles.lightTitle}>
-                        {firestation.name}
+                        {fireStation.name}
                     </Text>
                 </View>
             );
@@ -50,28 +48,28 @@ class Firestation extends Component {
 
 }
 
-Firestation.propTypes = {
+FireStation.propTypes = {
     user: PropTypes.object,
     token: PropTypes.object,
-    firestation: PropTypes.object,
+    fireStation: PropTypes.object,
     navigation: PropTypes.object.isRequired,
-    getUserFirestation: PropTypes.func.isRequired,
+    getUserFireStation: PropTypes.func.isRequired,
 };
 
-Firestation.defaultProps = {
+FireStation.defaultProps = {
     user: null,
     token: null,
-    firestation: null,
+    fireStation: null,
 };
 
 const mapStateToProps = state => ({
     user: getUserState(state),
     token: getTokenState(state),
-    firestation: getFirestationState(state),
+    fireStation: getFireStationState(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-    getUserFirestation: (id) => dispatch(getUserFirestation(id)),
+    getUserFireStation: (id) => dispatch(getUserFirestation(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Firestation);
+export default connect(mapStateToProps, mapDispatchToProps)(FireStation);

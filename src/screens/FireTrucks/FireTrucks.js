@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
-import TextStyles from '../../helpers/TextStyles';
+import TextStyles from 'helpers/TextStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import DrawerMenuButton from '../../components/common/DrawerMenuButton';
-import getInterventionState from '../../redux/selectors/InterventionSelectors';
+import DrawerMenuButton from 'components/common/DrawerMenuButton';
 import getFireStationState from '../../redux/selectors/FireStationSelectors';
-import {getIntervention} from '../../redux/actions/interventions';
+import getFirefighterState from '../../redux/selectors/FirefighterSelectors';
+import {getFirefighter} from '../../redux/actions/firefighter';
 
-class Interventions extends Component {
+class FireTrucks extends Component {
     static navigationOptions = ({navigation}) => ({
-        headerTitle: strings.interventions,
+        headerTitle: strings.firetruck,
         headerLeft: (
             <DrawerMenuButton navigation={navigation}/>
         ),
@@ -20,26 +20,25 @@ class Interventions extends Component {
 
     constructor(props) {
         super(props);
-        this.getInterventions();
+        this.getFirefighters();
     }
 
-    getInterventions = () => {
+    getFirefighters = () => {
         const {fireStation} = this.props;
-        console.log(fireStation);
+        console.log('firefighter firestation', fireStation);
         if (fireStation) {
-            console.log('Firestation id: ', fireStation.id);
-            this.props.getIntervention(fireStation.id);
+            this.props.getFirefighter(fireStation.id);
         }
     };
 
     render() {
-        const {intervention} = this.props;
-        console.log('interventions: ', intervention);
-        if (intervention) {
+        const {firefighters} = this.props;
+        console.log('firefighters: ', firefighters);
+        if (firefighters) {
             return (
                 <View style={styles.container}>
                     <Text style={TextStyles.lightTitle}>
-                        This is Intervention Screen
+                        This is Fire Trucks Screen
                     </Text>
                     <Text>
                     </Text>
@@ -51,25 +50,25 @@ class Interventions extends Component {
 
 }
 
-Interventions.propTypes = {
+FireTrucks.propTypes = {
     fireStation: PropTypes.object,
-    intervention: PropTypes.object,
+    firefighters: PropTypes.object,
     navigation: PropTypes.object.isRequired,
-    getIntervention: PropTypes.func.isRequired,
+    getFirefighter: PropTypes.func.isRequired,
 };
 
-Interventions.defaultProps = {
+FireTrucks.defaultProps = {
+    firefighters: null,
     fireStation: null,
-    intervention: null,
 };
 
 const mapStateToProps = state => ({
     fireStation: getFireStationState(state),
-    intervention: getInterventionState(state),
+    firefighters: getFirefighterState(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-    getIntervention: (id) => dispatch(getIntervention(id)),
+    getFirefighter: (id) => dispatch(getFirefighter(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Interventions);
+export default connect(mapStateToProps, mapDispatchToProps)(FireTrucks);

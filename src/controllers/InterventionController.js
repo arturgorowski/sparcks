@@ -1,4 +1,3 @@
-import {FIRESTATIONS} from 'react-native-dotenv';
 import httpClient from './HttpClient';
 
 class InterventionController {
@@ -6,7 +5,7 @@ class InterventionController {
         console.log(id);
         try {
             let intervention = await httpClient.get(
-                `${FIRESTATIONS}/${id}/interventions`,
+                `fireStations/${id}/interventions`,
             );
             console.log('-------------------------------------------------------InterventionController.js---------------');
             console.log('getInterventions() - intervention.data: ', intervention.data);

@@ -1,47 +1,75 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {Component} from 'react';
 import {View, Text} from 'react-native';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-
-import Button from 'components/common/Button';
 import styles from './styles';
+import TextStyles from '../../helpers/TextStyles';
+import strings from 'localization/index';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import DrawerMenuButton from '../../components/common/DrawerMenuButton';
+import getUserState from '../../redux/selectors/UserSelectors';
+import getTokenState from '../../redux/selectors/TokenSelectors';
+import getFireStationState from '../../redux/selectors/FireStationSelectors';
+import {getUserFirestation} from '../../redux/actions/fireStation';
 
-import strings from 'localization';
-import TextStyles from 'helpers/TextStyles';
-import { logout } from 'redux/actions/user/actions';
-import getUser from 'redux/selectors/UserSelectors';
+class Profile extends Component {
+    static navigationOptions = ({navigation}) => ({
+        headerTitle: strings.profile,
+        headerLeft: (
+            <DrawerMenuButton navigation={navigation}/>
+        ),
+    });
 
-function Profile(props) {
-  const user = useSelector(state => getUser(state));
-  const dispatch = useDispatch();
-  const logoutUser = useCallback(() => dispatch(logout()), [dispatch]);
-
-  useEffect(() => {
-    if (user === null) {
-      props.navigation.navigate('Auth');
+    constructor(props) {
+        super(props);
+        this.loggedUserFireStation();
     }
-  });
 
-  return (
-    <View style={styles.container}>
-      <Text style={TextStyles.fieldTitle}> {strings.profile} </Text>
-      <Text>
-        {strings.profileMessage}
-      </Text>
-      <Button
-        title={strings.logout}
-        onPress={logoutUser}
-      />
-    </View>
-  );
+    loggedUserFireStation = () => {
+        const {user} = this.props;
+        if (user) {
+            this.props.getUserFireStation(user.fireStationId);
+        }
+    };
+
+    render() {
+        const {fireStation} = this.props;
+        console.log('fireStation: ', fireStation);
+        if (fireStation) {
+            return (
+                <View style={styles.container}>
+                    <Text style={TextStyles.lightTitle}>
+                        {fireStation.name}
+                    </Text>
+                </View>
+            );
+        }
+        return null;
+    }
+
 }
 
-Profile.navigationOptions = {
-  title: strings.profile,
-};
-
 Profile.propTypes = {
-  navigation: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    token: PropTypes.object,
+    fireStation: PropTypes.object,
+    navigation: PropTypes.object.isRequired,
+    getUserFireStation: PropTypes.func.isRequired,
 };
 
-export default Profile;
+Profile.defaultProps = {
+    user: null,
+    token: null,
+    fireStation: null,
+};
+
+const mapStateToProps = state => ({
+    user: getUserState(state),
+    token: getTokenState(state),
+    fireStation: getFireStationState(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    getUserFireStation: (id) => dispatch(getUserFirestation(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
