@@ -4,6 +4,7 @@ import user from './UserReducer';
 import status from './StatusReducer';
 import token from './TokenReducer';
 import firestation from './FirestationReducer';
+import intervention from './InterventionReducer';
 
 const combineReducer = combineReducers({
     error,
@@ -11,6 +12,7 @@ const combineReducer = combineReducers({
     status,
     token,
     firestation,
+    intervention,
 });
 
 const rootReducer = (state, action) => {

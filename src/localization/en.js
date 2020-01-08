@@ -7,7 +7,7 @@ export default {
     email: 'Email',
     home: 'Home',
     maps: 'Maps',
-    alarm: 'Alarm',
+    interventions: 'Interventions',
     hydrants: 'Hydrants',
     homeMessage: 'Welcome',
     profile: 'Profile',

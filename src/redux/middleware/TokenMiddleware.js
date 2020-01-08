@@ -9,10 +9,10 @@ export default ({getState}) => next => async (action) => {
     const {token} = getState();
 
     if (action.type === actionTypes.SAVE_TOKEN) {
-        console.log('token', action.token.id);
+        //console.log('token', action.token.id);
         setParams(action.token.id);
     } else if (token) {
-        console.log('token', token.id);
+        //console.log('token', token.id);
         setParams(token.id);
     }
     return next(action);

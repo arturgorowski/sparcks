@@ -18,8 +18,6 @@ class Drawer extends Component {
         console.log('--------------DRAWER.JS--------------');
         console.log('user Drawer: ', user);
         console.log('token Drawer: ', token);
-        console.log('Drawer.js user === null: ', user === null);
-        console.log('Drawer.js token === null: ', token === null);
         if (token === null) {
             navigation.navigate('Auth');
         }
