@@ -6,6 +6,7 @@ import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import DrawerMenuButton from 'components/common/DrawerMenuButton';
+import LoadingIndicator from 'components/common/LoadingIndicator';
 
 class Hydrants extends Component {
     static navigationOptions = ({navigation}) => ({

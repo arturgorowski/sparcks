@@ -5,11 +5,12 @@ import TextStyles from '../../helpers/TextStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import LoadingIndicator from 'components/common/LoadingIndicator';
 import DrawerMenuButton from '../../components/common/DrawerMenuButton';
 import getUserState from '../../redux/selectors/UserSelectors';
 import getTokenState from '../../redux/selectors/TokenSelectors';
 import getFireStationState from '../../redux/selectors/FireStationSelectors';
-import {getUserFirestation} from '../../redux/actions/fireStation';
+import {getUserFireStation} from '../../redux/actions/fireStation';
 
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -43,7 +44,7 @@ class Profile extends Component {
                 </View>
             );
         }
-        return null;
+        return <LoadingIndicator/>;
     }
 
 }
@@ -69,7 +70,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getUserFireStation: (id) => dispatch(getUserFirestation(id)),
+    getUserFireStation: (id) => dispatch(getUserFireStation(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

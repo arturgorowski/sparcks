@@ -5,7 +5,6 @@ import {saveToken} from '../token';
 
 export const login = (username, password) => async (dispatch) => {
     dispatch(loginRequest());
-    console.log('Login()');
     try {
         const token = await UserController.login(username, password);
         dispatch(saveToken(token));

@@ -5,6 +5,7 @@ import TextStyles from 'helpers/TextStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import LoadingIndicator from 'components/common/LoadingIndicator';
 import DrawerMenuButton from 'components/common/DrawerMenuButton';
 
 class Maps extends Component {

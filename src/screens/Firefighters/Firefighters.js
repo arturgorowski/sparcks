@@ -5,6 +5,7 @@ import TextStyles from 'helpers/TextStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import LoadingIndicator from 'components/common/LoadingIndicator';
 import DrawerMenuButton from 'components/common/DrawerMenuButton';
 import getFireStationState from '../../redux/selectors/FireStationSelectors';
 import getFirefighterState from '../../redux/selectors/FirefighterSelectors';
@@ -32,9 +33,9 @@ class Firefighters extends Component {
     };
 
     render() {
-        const {firefighters} = this.props;
-        console.log('firefighters: ', firefighters);
-        if (firefighters) {
+        const {firefighter} = this.props;
+        console.log('firefighter: ', firefighter);
+        if (firefighter) {
             return (
                 <View style={styles.container}>
                     <Text style={TextStyles.lightTitle}>
@@ -45,26 +46,26 @@ class Firefighters extends Component {
                 </View>
             );
         }
-        return null;
+        return <LoadingIndicator/>;
     }
 
 }
 
 Firefighters.propTypes = {
     fireStation: PropTypes.object,
-    firefighters: PropTypes.object,
+    firefighter: PropTypes.object,
     navigation: PropTypes.object.isRequired,
     getFirefighter: PropTypes.func.isRequired,
 };
 
 Firefighters.defaultProps = {
-    firefighters: null,
+    firefighter: null,
     fireStation: null,
 };
 
 const mapStateToProps = state => ({
     fireStation: getFireStationState(state),
-    firefighters: getFirefighterState(state),
+    firefighter: getFirefighterState(state),
 });
 
 const mapDispatchToProps = dispatch => ({

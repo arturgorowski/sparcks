@@ -3,7 +3,6 @@ import {firefightersError, firefightersRequest, firefightersSuccess} from './act
 
 export const getFirefighter = (id) => async (dispatch) => {
     dispatch(firefightersRequest());
-    console.log('getFirefighter()');
     try {
         const firefighter = await FirefighterController.getFirefighter(id);
         console.log(firefighter);

@@ -5,6 +5,7 @@ import TextStyles from '../../helpers/TextStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import LoadingIndicator from 'components/common/LoadingIndicator';
 import DrawerMenuButton from '../../components/common/DrawerMenuButton';
 import getInterventionState from '../../redux/selectors/InterventionSelectors';
 import getFireStationState from '../../redux/selectors/FireStationSelectors';
@@ -46,7 +47,7 @@ class Interventions extends Component {
                 </View>
             );
         }
-        return null;
+        return <LoadingIndicator/>;
     }
 
 }

@@ -15,9 +15,9 @@ import LogoutIcon from '../../assets/menu/logout.svg';
 class Drawer extends Component {
     componentDidUpdate() {
         const {user, navigation, token} = this.props;
-        console.log('--------------DRAWER.JS--------------');
-        console.log('user Drawer: ', user);
-        console.log('token Drawer: ', token);
+        // console.log('--------------DRAWER.JS--------------');
+        // console.log('user Drawer: ', user);
+        // console.log('token Drawer: ', token);
         if (token === null) {
             navigation.navigate('Auth');
         }

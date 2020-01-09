@@ -9,6 +9,8 @@ import DrawerMenuButton from 'components/common/DrawerMenuButton';
 import getFireStationState from '../../redux/selectors/FireStationSelectors';
 import getFirefighterState from '../../redux/selectors/FirefighterSelectors';
 import {getFirefighter} from '../../redux/actions/firefighter';
+import LoadingIndicator from 'components/common/LoadingIndicator';
+
 
 class FireTrucks extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -25,16 +27,16 @@ class FireTrucks extends Component {
 
     getFirefighters = () => {
         const {fireStation} = this.props;
-        console.log('firefighter firestation', fireStation);
+        console.log('firefighter fireStation', fireStation);
         if (fireStation) {
             this.props.getFirefighter(fireStation.id);
         }
     };
 
     render() {
-        const {firefighters} = this.props;
-        console.log('firefighters: ', firefighters);
-        if (firefighters) {
+        const {fireStation} = this.props;
+        console.log('fireStation: ', fireStation);
+        if (fireStation) {
             return (
                 <View style={styles.container}>
                     <Text style={TextStyles.lightTitle}>
@@ -45,7 +47,7 @@ class FireTrucks extends Component {
                 </View>
             );
         }
-        return null;
+        return <LoadingIndicator/>;
     }
 
 }
