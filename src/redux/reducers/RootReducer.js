@@ -19,7 +19,7 @@ const combineReducer = combineReducers({
 
 const rootReducer = (state, action) => {
     if (action.type === 'GLOBAL_RESET') {
-        return {};
+        state = {};
     }
     return combineReducer(state, action);
 };

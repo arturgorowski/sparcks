@@ -3,7 +3,7 @@ import Colors from '../helpers/Colors';
 
 const styles = StyleSheet.create({
     lightTitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: '700',
         color: Colors.white,
     },

@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 });
 
 const DrawerMenuButton = props => (
-
     <TouchableRipple
         {...props}
         borderless
@@ -27,7 +26,7 @@ const DrawerMenuButton = props => (
             props.navigation.dispatch(DrawerActions.openDrawer());
         }}
     >
-        <IconMaterial name="menu" size={28} color={Colors.primaryGrey}/>
+        <IconMaterial name="menu" size={28} color={Colors.primaryGrey} />
     </TouchableRipple>
 );
 

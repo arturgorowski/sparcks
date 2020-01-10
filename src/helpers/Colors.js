@@ -21,8 +21,8 @@ export default {
 
 
     primaryGrey: 'dimgrey',
-    primaryGrey10: 'ghostwhite',
-    // primaryGrey10: '#f1f4fb',
+    // primaryGrey10: 'ghostwhite',
+    primaryGrey10: '#f1f4fb',
     primaryGrey20: '#cad1e3',
     primaryGrey30: '#c4c6cf',
     primaryGrey40: '#a5a8b5',

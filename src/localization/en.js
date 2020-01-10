@@ -22,4 +22,14 @@ export default {
     alert_session_expired_message: 'Your session expired. Please signIn again.',
     validator_username_required: 'Username is required',
     validator_password_required: 'Password is required',
+
+    //////////PROFILE
+    firefighterData: 'Firefighter information:',
+    currentLocation: 'Yours location:',
+    longitude: 'Longitude',
+    latitude: 'Latitude',
+    altitude: 'Altitude',
+    speed: 'Speed',
+    accuracy: 'Accuracy',
+    address: 'Yours address',
 };
