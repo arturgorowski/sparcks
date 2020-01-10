@@ -4,9 +4,11 @@ const initialState = {firefighter: null};
 
 const firefighterReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.GET_FIRESTATION_SUCCESS:
+        case actionTypes.GET_FIREFIGHTER_SUCCESS:
+            console.log(action.firefighter);
             return {
-                ...action.firefighter,
+                ...state,
+                firefighter: action.firefighter,
             };
         default:
             return state;

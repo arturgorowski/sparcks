@@ -21,6 +21,9 @@ class Firefighters extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
         this.getFirefighters();
     }
 

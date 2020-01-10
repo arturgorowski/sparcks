@@ -1,1 +1,1 @@
-export default state => state.fireStation;
+export default state => state.fireStation.fireStation;

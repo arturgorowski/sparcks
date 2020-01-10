@@ -15,15 +15,25 @@ import {getUserFireStation} from '../../redux/actions/fireStation';
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
         headerTitle: strings.profile,
-        headerLeft: (
-            <DrawerMenuButton navigation={navigation}/>
-        ),
+        headerLeft: <DrawerMenuButton navigation={navigation} />,
     });
 
     constructor(props) {
         super(props);
-        this.loggedUserFireStation();
     }
+
+    componentDidMount(): void {
+        const {user} = this.props;
+        console.log("user: ", user);
+        this.props.getUserFireStation(user.fireStationId);
+    }
+
+    //
+    // componentDidUpdate() {
+    //     if (this.props.fireStation == null) {
+    //         this.props.navigation.navigate('Auth');
+    //     }
+    // }
 
     loggedUserFireStation = () => {
         const {user} = this.props;
@@ -44,13 +54,12 @@ class Profile extends Component {
                 </View>
             );
         }
-        return <LoadingIndicator/>;
+        return <LoadingIndicator />;
     }
-
 }
 
 Profile.propTypes = {
-    user: PropTypes.object,
+    user: PropTypes.object.isRequired,
     token: PropTypes.object,
     fireStation: PropTypes.object,
     navigation: PropTypes.object.isRequired,
@@ -58,7 +67,7 @@ Profile.propTypes = {
 };
 
 Profile.defaultProps = {
-    user: null,
+    // user: null,
     token: null,
     fireStation: null,
 };
@@ -70,7 +79,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getUserFireStation: (id) => dispatch(getUserFireStation(id)),
+    getUserFireStation: id => dispatch(getUserFireStation(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

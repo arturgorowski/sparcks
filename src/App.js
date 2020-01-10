@@ -42,7 +42,7 @@ class App extends Component {
 
     _renderEmpty = () => {
         if (Platform.OS === 'ios') {
-            return <LoadingIndicator/>;
+            return <LoadingIndicator />;
         }
         return (
             <View style={styles.logoContainer}>
@@ -70,14 +70,14 @@ class App extends Component {
             <StoreProvider store={store}>
                 <PaperProvider theme={theme}>
                     <StatusBar backgroundColor={Colors.primaryWhite} barStyle="dark-content" animated/>
-                    {this.state.isConnected
-                        ? (
-                            <Navigation ref={(navigatorRef) => {
+                    {this.state.isConnected ? (
+                        <Navigation ref={(navigatorRef) => {
                                 NavigationService.setTopLevelNavigator(navigatorRef);
                             }}
-                            />
-                        )
-                        : this._renderNoInternet()}
+                        />
+                    ) : (
+                        this._renderNoInternet()
+                    )}
                 </PaperProvider>
             </StoreProvider>
         );

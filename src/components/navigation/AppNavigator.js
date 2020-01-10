@@ -78,7 +78,7 @@ const AppStack = createDrawerNavigator(
     },
     {
         contentComponent: Drawer,
-        drawerWidth: 300,
+        drawerWidth: 301,
         useNativeAnimations: true,
     },
 );

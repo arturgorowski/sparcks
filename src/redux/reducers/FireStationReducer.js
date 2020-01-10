@@ -6,7 +6,8 @@ const fireStationReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_FIRESTATION_SUCCESS:
             return {
-                ...action.fireStation,
+                ...state,
+                fireStation: action.fireStation,
             };
         default:
             return state;

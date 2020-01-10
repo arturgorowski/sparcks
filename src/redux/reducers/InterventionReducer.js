@@ -6,7 +6,8 @@ const interventionReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_INTERVENTION_SUCCESS:
             return {
-                ...state.intervention,
+                ...state,
+                intervention: action.intervention,
             };
         default:
             return state;

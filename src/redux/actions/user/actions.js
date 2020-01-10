@@ -31,5 +31,3 @@ export const logoutError = error => ({
     type: actionTypes.LOGOUT_ERROR,
     error,
 });
-
-

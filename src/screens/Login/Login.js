@@ -36,6 +36,7 @@ class Login extends Component {
     };
 
     componentDidMount(): void {
+        if (this.props.fullStatus.isLoading) this.props.logout();
         if (this.props.fullStatus.isLoading) {
             this.props.logout();
         }
@@ -74,14 +75,15 @@ class Login extends Component {
             });
     };
 
-    validateData = (fieldName) => {
+    validateData = fieldName => {
         const {errors} = this.state;
 
         errors[fieldName] = validate(fieldName, this.state[fieldName]);
         const validationError = Boolean(Object.values(errors).filter(error => error).length);
 
         this.setState({
-            errors, validationError,
+            errors,
+            validationError,
         });
     };
 
@@ -90,7 +92,10 @@ class Login extends Component {
         return (
             <KeyboardAvoidingView style={styles.container}>
                 <StatusBar backgroundColor="#ffffff" barStyle="dark-content"/>
-                <Image style={styles.logo} source={require('assets/logo/sparcks.png')}/>
+                <Image
+                    style={styles.logo}
+                    source={require('assets/logo/sparcks.png')}
+                />
                 <TextField
                     placeholder={strings.username}
                     autoCapitalize="none"
@@ -109,18 +114,22 @@ class Login extends Component {
                     secureTextEntry
                     returnKeyType="go"
                 />
-                <ErrorView errors={errors}/>
+                <ErrorView errors={errors} />
                 <Button
-                    disabled={fullStatus.isLoading || !this.state.username.length || !this.state.password.length}
+                    disabled={
+                        fullStatus.isLoading ||
+                        !this.state.username.length ||
+                        !this.state.password.length
+                    }
                     onPress={this.login}
-                    title={fullStatus.isLoading ? strings.loading : strings.login}
+                    title={
+                        fullStatus.isLoading ? strings.loading : strings.login
+                    }
                 />
             </KeyboardAvoidingView>
         );
     }
-
 }
-
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,

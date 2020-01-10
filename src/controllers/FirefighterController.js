@@ -1,7 +1,7 @@
 import httpClient from './HttpClient';
 
 class FirefighterController {
-    getFirefighter = async (id) => {
+    getFirefighter = async id => {
         console.log(id);
         try {
             let firefighter = await httpClient.get(
