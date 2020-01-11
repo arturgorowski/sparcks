@@ -1,1 +1,1 @@
-export default state => state.firefighter;
+export default state => state.firefighter.firefighter;

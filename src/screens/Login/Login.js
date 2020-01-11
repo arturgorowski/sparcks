@@ -24,12 +24,15 @@ class Login extends Component {
         username: '',
         password: '',
         errors: {
-            username: null, password: null,
+            username: null,
+            password: null,
         },
         validationError: false,
     };
     componentDidMount(): void {
-        if (this.props.fullStatus.isLoading) this.props.logout();
+        if (this.props.fullStatus.isLoading) {
+            this.props.logout();
+        }
     }
     componentDidUpdate() {
         this.navigateToHomeIfLogged();
@@ -39,11 +42,11 @@ class Login extends Component {
     passwordChanged = value => this.setState({password: value});
     navigateToHomeIfLogged = () => {
         //console.log('navigateToHomeIfLogged - Login.js: ', this.props.user);
-        const {user, navigation, token} = this.props;
-        console.log('-------------------------------------------------------LOGIN.JS-------------');
-        console.log('Login.js user !== null: ', user !== null);
-        console.log('Login.js user: ', user);
-        console.log('Login.js token: ', token);
+        const {user, navigation} = this.props;
+        // console.log('-------------------------------------------------------LOGIN.JS-------------');
+        // console.log('Login.js user !== null: ', user !== null);
+        // console.log('Login.js user: ', user);
+        // console.log('Login.js token: ', token);
         if (user !== null) {
             navigation.navigate('App');
         }
@@ -54,7 +57,9 @@ class Login extends Component {
     validateData = fieldName => {
         const {errors} = this.state;
         errors[fieldName] = validate(fieldName, this.state[fieldName]);
-        const validationError = Boolean(Object.values(errors).filter(error => error).length);
+        const validationError = Boolean(
+            Object.values(errors).filter(error => error).length,
+        );
         this.setState({
             errors,
             validationError,
@@ -64,7 +69,7 @@ class Login extends Component {
         const {fullStatus, errors} = this.props;
         return (
             <KeyboardAvoidingView style={styles.container}>
-                <StatusBar backgroundColor="#ffffff" barStyle="dark-content"/>
+                <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
                 <Image
                     style={styles.logo}
                     source={require('assets/logo/sparcks.png')}
@@ -127,4 +132,7 @@ const mapDispatchToProps = dispatch => ({
     login: (username, password) => dispatch(login(username, password)),
     logout: () => dispatch(logout()),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Login);

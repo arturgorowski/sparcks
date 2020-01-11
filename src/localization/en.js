@@ -32,4 +32,16 @@ export default {
     speed: 'Speed',
     accuracy: 'Accuracy',
     address: 'Yours address',
+    permissionTitle: 'Location Access Required',
+    permissionMessage: 'This App needs to Access your location',
+    permissionDenied: 'Permission Denied',
+    permissionError: 'Error, cannot get your location',
+
+    //////////FIRE STATION
+    fireStationData: 'Fire Station information:',
+    fireStationEquipmentsData: 'Fire Station Equipments:',
+    numberOfFirefighters: 'Number of firefighters:',
+    numberOfInterventions: 'Number of interventions:',
+    numberOfFireTrucks: 'Number of fire trucks:',
+
 };

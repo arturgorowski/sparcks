@@ -8,13 +8,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primaryGrey10,
         padding: 15,
     },
-    boxContainer: {
-        display: 'flex',
-        padding: 15,
-        backgroundColor: Colors.primaryWhite,
-        borderRadius: 5,
-    },
-    userInformationContainer: {
+    informationContainer: {
         display: 'flex',
         flexDirection: 'row',
     },
@@ -26,32 +20,13 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingLeft: 20,
     },
-    location: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
     row: {
         width: '48%',
     },
-    divider1: {
+    divider: {
         marginTop: 10,
         marginBottom: 10,
         backgroundColor: Colors.gray,
-    },
-    boxHeaderText: {
-        fontSize: 20,
-        color: Colors.primaryDarkBlue,
-        fontWeight: '600',
-    },
-    boxContentTitleText: {
-        fontSize: 17,
-        color: Colors.primaryDarkBlue,
-        fontWeight: '600',
-    },
-    boxContentBodyText: {
-        fontSize: 16,
-        color: Colors.primaryDarkBlue,
-        fontWeight: '300',
     },
 });
 

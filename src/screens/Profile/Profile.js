@@ -3,9 +3,11 @@ import {View, Text, PermissionsAndroid, Platform} from 'react-native';
 import styles from './styles';
 import Colors from '../../helpers/Colors';
 import ShadowStyles from '../../helpers/ShadowStyles';
+import BoxStyles from '../../helpers/BoxStyles';
 import strings from 'localization/index';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {API_KEY} from 'react-native-dotenv';
 import Geolocation from '@react-native-community/geolocation';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import LoadingIndicator from 'components/common/LoadingIndicator';
@@ -56,18 +58,18 @@ class Profile extends Component {
                     const granted = await PermissionsAndroid.request(
                         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
                         {
-                            title: 'Location Access Required',
-                            message: 'This App needs to Access your location',
+                            title: strings.permissionTitle,
+                            message: strings.permissionMessage,
                         },
                     );
                     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                         //To Check, If Permission is granted
                         that.callLocation(that);
                     } else {
-                        alert('Permission Denied');
+                        alert(strings.permissionDenied);
                     }
                 } catch (err) {
-                    alert('Error, cannot get your location', err);
+                    alert(strings.permissionError, err);
                     console.warn(err);
                 }
             }
@@ -123,13 +125,13 @@ class Profile extends Component {
     };
 
     getGpsCordinates = (latitude, longitude) => {
-        Geocoder.init('AIzaSyDCFNNy1XyJYSELallp8EeJlhVMDaWqLQ4');
+        Geocoder.init(API_KEY);
 
         Geocoder.from({lat: latitude, lng: longitude})
             .then(json => {
                 let addressComponent = json.results[0].formatted_address;
                 this.setState({addressComponent: addressComponent});
-                // console.log('ADRES:', addressComponent);
+                console.log('ADRES:', addressComponent);
             })
             .catch(error => console.warn(error));
     };
@@ -141,76 +143,76 @@ class Profile extends Component {
 
     render() {
         const {fireStation, user} = this.props;
-        // console.log('fireStation: ', fireStation);
-        // console.log('user: ', user);
+        console.log('fireStation: ', fireStation);
+        console.log('user: ', user);
         if (fireStation) {
             return (
                 <View style={styles.container}>
 
-                    <View style={[styles.boxContainer, ShadowStyles.shadow]}>
+                    <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
                         <View>
-                            <Text style={styles.boxHeaderText}>{strings.firefighterData}</Text>
+                            <Text style={BoxStyles.boxHeaderText}>{strings.firefighterData}</Text>
                         </View>
 
-                        <Divider style={[styles.divider, styles.divider1]} />
+                        <Divider style={styles.divider} />
 
-                        <View style={styles.userInformationContainer}>
+                        <View style={styles.informationContainer}>
                             <View style={styles.userAvatar}>
                                 <IconEntypo name="user" size={45} color={Colors.primaryDarkBlue} />
                             </View>
                             <View style={styles.firefighterInformation}>
-                                <Text style={styles.boxHeaderText}>{user.firstName} {user.lastName}</Text>
-                                <Text style={styles.boxContentTitleText}>{user.email}</Text>
-                                <Text style={styles.boxContentTitleText}>{fireStation.name}</Text>
-                                <Text style={styles.boxContentTitleText}>{user.function}</Text>
+                                <Text style={BoxStyles.boxHeaderText}>{user.firstName} {user.lastName}</Text>
+                                <Text style={BoxStyles.boxContentTitleText}>{user.email}</Text>
+                                <Text style={BoxStyles.boxContentTitleText}>{fireStation.name}</Text>
+                                <Text style={BoxStyles.boxContentTitleText}>{user.function}</Text>
                             </View>
                         </View>
                     </View>
 
                     <View style={{paddingTop: 15}} />
 
-                    <View style={[styles.boxContainer, ShadowStyles.shadow]}>
+                    <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
                         <View>
-                            <Text style={styles.boxHeaderText}>{strings.currentLocation}</Text>
+                            <Text style={BoxStyles.boxHeaderText}>{strings.currentLocation}</Text>
                         </View>
 
                         <Divider style={[styles.divider, styles.divider1]} />
 
-                        <View style={styles.location}>
-                            <Text style={[styles.boxContentTitleText, styles.row]}>{strings.latitude}:</Text>
-                            <Text style={styles.boxContentBodyText}>{this.state.currentLatitude}</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.latitude}:</Text>
+                            <Text style={BoxStyles.boxContentBodyText}>{this.state.currentLatitude}</Text>
                         </View>
 
-                        <View style={styles.location}>
-                            <Text style={[styles.boxContentTitleText, styles.row]}>{strings.longitude}:</Text>
-                            <Text style={styles.boxContentBodyText}>{this.state.currentLongitude}</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.longitude}:</Text>
+                            <Text style={BoxStyles.boxContentBodyText}>{this.state.currentLongitude}</Text>
                         </View>
 
-                        <View style={styles.location}>
-                            <Text style={[styles.boxContentTitleText, styles.row]}>{strings.altitude}:</Text>
-                            <Text style={styles.boxContentBodyText}>{this.state.altitude} m</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.altitude}:</Text>
+                            <Text style={BoxStyles.boxContentBodyText}>{this.state.altitude} m</Text>
                         </View>
 
-                        <View style={styles.location}>
-                            <Text style={[styles.boxContentTitleText, styles.row]}>{strings.speed}:</Text>
-                            <Text style={styles.boxContentBodyText}>{this.state.speed} km/h</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.speed}:</Text>
+                            <Text style={BoxStyles.boxContentBodyText}>{this.state.speed} km/h</Text>
                         </View>
 
-                        <View style={styles.location}>
-                            <Text style={[styles.boxContentTitleText, styles.row]}>{strings.accuracy}:</Text>
-                            <Text style={styles.boxContentBodyText}>{this.state.accuracy} m</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.accuracy}:</Text>
+                            <Text style={BoxStyles.boxContentBodyText}>{this.state.accuracy} m</Text>
                         </View>
 
                         <View style={{paddingTop: 25}} />
 
-                        <View style={styles.location}>
-                            <Text style={[styles.boxHeaderText, styles.row]}>{strings.address}:</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={[BoxStyles.boxHeaderText, styles.row]}>{strings.address}:</Text>
                         </View>
 
                         <Divider style={[styles.divider, styles.divider1]} />
 
-                        <View style={styles.location}>
-                            <Text style={styles.boxContentBodyText}>{this.state.addressComponent}</Text>
+                        <View style={styles.informationContainer}>
+                            <Text style={BoxStyles.boxContentBodyText}>{this.state.addressComponent}</Text>
                         </View>
                     </View>
                 </View>

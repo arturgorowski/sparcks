@@ -44,14 +44,11 @@ class Firefighters extends Component {
                     <Text style={TextStyles.lightTitle}>
                         This is Firefighters Screen
                     </Text>
-                    <Text>
-                    </Text>
                 </View>
             );
         }
-        return <LoadingIndicator/>;
+        return <LoadingIndicator />;
     }
-
 }
 
 Firefighters.propTypes = {

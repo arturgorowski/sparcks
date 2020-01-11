@@ -5,13 +5,10 @@ class UserController {
     login = async (username, password) => {
         console.log(username, password);
         try {
-            let token = await httpClient.post(
-                `${LOGIN_BASE_PATH}`,
-                {
-                    username: username,
-                    password: password,
-                },
-            );
+            let token = await httpClient.post(`${LOGIN_BASE_PATH}`, {
+                username: username,
+                password: password,
+            });
             console.log('login() - token.data: ', token.data);
             return token.data;
             // Data is the object exposes by axios for the response json
