@@ -18,6 +18,7 @@ import getFireStationState from '../../redux/selectors/FireStationSelectors';
 import {getUserFireStation} from '../../redux/actions/fireStation';
 import {Divider} from 'react-native-paper';
 import Geocoder from 'react-native-geocoding';
+import AvatarFrame from '../../assets/avatar/avatar_frame.svg';
 
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -157,8 +158,11 @@ class Profile extends Component {
                         <Divider style={styles.divider} />
 
                         <View style={styles.informationContainer}>
-                            <View style={styles.userAvatar}>
-                                <IconEntypo name="user" size={45} color={Colors.primaryDarkBlue} />
+                            <View style={styles.avatarContainer}>
+                                <AvatarFrame style={styles.avatarFrame} />
+                                <View style={styles.noAvatar}>
+                                    <IconEntypo name="user" size={45} color={Colors.primaryWhite} />
+                                </View>
                             </View>
                             <View style={styles.firefighterInformation}>
                                 <Text style={BoxStyles.boxHeaderText}>{user.firstName} {user.lastName}</Text>

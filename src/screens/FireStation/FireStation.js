@@ -88,6 +88,7 @@ class FireStation extends Component {
                                 name="ios-arrow-down"
                                 size={28}
                                 color={Colors.primaryDarkBlue}
+                                style={DropDownStyle.dropDownIcon}
                             />
                         }
                         visibleElement={
@@ -95,6 +96,7 @@ class FireStation extends Component {
                                 name="ios-arrow-up"
                                 size={28}
                                 color={Colors.primaryDarkBlue}
+                                style={DropDownStyle.dropDownIcon}
                             />
                         }
                         header={
@@ -130,7 +132,7 @@ class FireStation extends Component {
         if (fireStation) {
             if (firefighter) {
                 return (
-                    <View style={styles.container}>
+                    <ScrollView style={styles.container}>
                         {this._renderFireStationInformation(
                             fireStation,
                             firefighter,
@@ -151,7 +153,7 @@ class FireStation extends Component {
                                 )}
                             </View>
                         </View>
-                    </View>
+                    </ScrollView>
                 );
             }
             return <LoadingIndicator />;

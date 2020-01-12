@@ -4,7 +4,7 @@ import Colors from 'helpers/Colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-start',
+        //justifyContent: 'flex-start',
         backgroundColor: Colors.primaryGrey10,
         padding: 15,
     },
