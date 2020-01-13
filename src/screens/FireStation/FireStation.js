@@ -147,7 +147,7 @@ class FireStation extends Component {
 
                             <Divider style={styles.divider} />
 
-                            <View>
+                            <View style={{marginBottom: 15}}>
                                 {this._renderFireStationEquipments(
                                     fireStation._fireStationEquipments,
                                 )}

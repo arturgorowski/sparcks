@@ -151,11 +151,11 @@ class Profile extends Component {
                 <View style={styles.container}>
 
                     <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
-                        <View>
-                            <Text style={BoxStyles.boxHeaderText}>{strings.firefighterData}</Text>
-                        </View>
+                        {/*<View>*/}
+                        {/*    <Text style={BoxStyles.boxHeaderText}>{strings.firefighterData}</Text>*/}
+                        {/*</View>*/}
 
-                        <Divider style={styles.divider} />
+                        {/*<Divider style={styles.divider} />*/}
 
                         <View style={styles.informationContainer}>
                             <View style={styles.avatarContainer}>

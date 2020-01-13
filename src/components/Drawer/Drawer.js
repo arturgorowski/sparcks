@@ -43,7 +43,7 @@ class Drawer extends Component {
                         style={{flex: 0, backgroundColor: Colors.primaryWhite}}
                     />
                     <SafeAreaView
-                        style={{flex: 1, backgroundColor: Colors.primaryNavyBlueLight}}>
+                        style={{flex: 1, backgroundColor: Colors.primaryDarkBlue}}>
                         <ScrollView
                             style={{flex: 1}}
                             contentContainerStyle={{flexGrow: 1}}

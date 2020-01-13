@@ -44,4 +44,13 @@ export default {
     numberOfInterventions: 'Number of interventions:',
     numberOfFireTrucks: 'Number of fire trucks:',
 
+    //////////FIREFIGHTER
+    fireFightersInformation: 'People from your fire unit:',
+    phoneNumber: 'Phone number: ',
+
+    //////////FIREFIGHTER
+    interventionsInformation: 'Interventions: ',
+    timeOfDeparture: 'Time of departure: ',
+    arrivalTime: 'ArrivalTime: ',
+    firefightersOnAction: 'Firefighters on action: ',
 };

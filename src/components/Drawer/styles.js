@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     navContainer: {
         flex: 1,
-        backgroundColor: Colors.primaryNavyBlueLight,
+        backgroundColor: Colors.primaryDarkBlue,
     },
     menuItemText: {
         fontSize: 16,

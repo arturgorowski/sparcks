@@ -1,1 +1,1 @@
-export default state => state.intervention;
+export default state => state.intervention.intervention;

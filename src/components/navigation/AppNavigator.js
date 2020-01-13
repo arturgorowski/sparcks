@@ -7,7 +7,8 @@ import FireStation from '../../screens/FireStation';
 import Hydrants from '../../screens/Hydrants';
 import Maps from '../../screens/Maps';
 import Profile from '../../screens/Profile';
-import FireTruck from '../../screens/FireTrucks';
+import FireTruckList from '../../screens/FireTrucks/FireTruckList';
+import FireTruckDetails from '../../screens/FireTrucks/FireTruckDetails';
 import Colors from '../../helpers/Colors';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import strings from '../../localization';
@@ -18,10 +19,8 @@ const defaultNavigationOptions = {
     headerTitleStyle: {fontSize: 20, color: Colors.primaryGrey},
 };
 
-const createCustomStackNavigator = component => createStackNavigator(
-    {component},
-    {defaultNavigationOptions},
-);
+const createCustomStackNavigator = component =>
+    createStackNavigator({component}, {defaultNavigationOptions});
 
 const InterventionsStack = createCustomStackNavigator(Interventions);
 const FirefightersStack = createCustomStackNavigator(Firefighters);
@@ -29,7 +28,13 @@ const FireStationStack = createCustomStackNavigator(FireStation);
 const HydrantsStack = createCustomStackNavigator(Hydrants);
 const MapsStack = createCustomStackNavigator(Maps);
 const ProfileStack = createCustomStackNavigator(Profile);
-const FireTruckStack = createCustomStackNavigator(FireTruck);
+const FireTruckStack = createStackNavigator(
+    {
+        FireTruckList,
+        FireTruckDetails,
+    },
+    {defaultNavigationOptions},
+);
 
 const AppStack = createDrawerNavigator(
     {
