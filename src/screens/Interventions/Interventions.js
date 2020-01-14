@@ -112,7 +112,10 @@ class Interventions extends Component {
                                 {item._firefightersOnActions.map(
                                     firefighter => {
                                         return (
-                                            <View style={styles.firefightersOnActionContainer}>
+                                            <View
+                                                key={firefighter.id}
+                                                style={styles.firefightersOnActionContainer}
+                                            >
                                                 <View>
                                                     <Text style={DropDownStyle.dropDownBody}>
                                                         {firefighter.firstName}{' '}

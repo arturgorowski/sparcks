@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import styles from './styles';
-import TextStyles from '../../../helpers/TextStyles';
 import strings from '../../../localization';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import getFireStationState from '../../../redux/selectors/FireStationSelectors';
 import LoadingIndicator from '../../../components/common/LoadingIndicator';
-import BoxStyles from "helpers/BoxStyles";
-import ShadowStyles from "helpers/ShadowStyles";
-import Colors from "helpers/Colors";
+import BoxStyles from 'helpers/BoxStyles';
+import ShadowStyles from 'helpers/ShadowStyles';
+import Colors from 'helpers/Colors';
+import SearchInput, {createFilter} from 'react-native-search-filter';
+
+const KEYS_TO_FILTERS = [
+    'name',
+    'producent',
+    'place',
+];
 
 class FireTruckDetails extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -27,44 +33,116 @@ class FireTruckDetails extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            searchTerm: '',
+        };
     }
+
+    searchUpdated(term) {
+        this.setState({searchTerm: term});
+    }
+
+    convertShortcut = shortcut => {
+        switch (shortcut) {
+            case 'S':
+                return <Text>{strings.S}</Text>;
+            case 'T':
+                return <Text>{strings.T}</Text>;
+            case 'D':
+                return <Text>{strings.D}</Text>;
+            case 'L1':
+                return <Text>{strings.L1}</Text>;
+            case 'L2':
+                return <Text>{strings.L2}</Text>;
+            case 'L3':
+                return <Text>{strings.L3}</Text>;
+            case 'L4':
+                return <Text>{strings.L4}</Text>;
+            case 'L5':
+                return <Text>{strings.L5}</Text>;
+            case 'R1':
+                return <Text>{strings.R1}</Text>;
+            case 'R2':
+                return <Text>{strings.R2}</Text>;
+            case 'R3':
+                return <Text>{strings.R3}</Text>;
+            case 'R4':
+                return <Text>{strings.R4}</Text>;
+            case 'R5':
+                return <Text>{strings.R5}</Text>;
+        }
+    };
+
+    _renderFireTruckEquipmentsElement = fireTruckEquipments => (
+        <View>
+            {fireTruckEquipments.map((item, i) => {
+                return (
+                    <View
+                        key={i}
+                        style={[BoxStyles.boxContainer, ShadowStyles.shadow, {marginBottom: 15}]}
+                    >
+                        <View>
+                            <View style={styles.fireTruckEquipmentHeader}>
+                                <View>
+                                    <Text style={[BoxStyles.boxHeaderText, {fontWeight: '700'}]}>
+                                        {item.name}
+                                    </Text>
+                                </View>
+                                <View>
+                                    <Text style={BoxStyles.boxContentTitleText}>
+                                        {item.quantity}x
+                                    </Text>
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={[BoxStyles.boxContentTitleText, {color: Colors.primaryPurple}]}>
+                                    {item.producent}
+                                </Text>
+                            </View>
+                            <View>
+                                <Text style={[BoxStyles.boxContentTitleText, {color: Colors.primaryNavyBlue, textAlign: 'right'}]}>
+                                    {this.convertShortcut(item.place)}
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                );
+            })}
+        </View>
+    );
 
     _renderFireTruckEquipments = fireTruckEquipments => {
         {
             if (fireTruckEquipments.length > 0) {
+                const filteredFireTruckEquipments = fireTruckEquipments.filter(
+                    createFilter(this.state.searchTerm, KEYS_TO_FILTERS),
+                );
                 return (
                     <View>
-                        {fireTruckEquipments.map((item, i) => {
-                            return (
-                                <View
-                                    key={i}
-                                    style={[BoxStyles.boxContainer, ShadowStyles.shadow, {marginBottom: 15}]}
-                                >
-                                    <View style={{width: '90%'}}>
-                                        <View style={styles.fireTruckList}>
-                                            <View style={{width: '80%'}}>
-                                                <Text style={[BoxStyles.boxHeaderText, {fontWeight: '700'}]}>{item.name}</Text>
-                                            </View>
-                                            <View style={{width: '20%'}}>
-                                                <Text style={BoxStyles.boxContentTitleText}>{item.operationalNumber}</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{width: '90%'}}>
-                                            <Text style={[BoxStyles.boxContentTitleText, {color: Colors.primaryPurple}]}>{item.type}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{width: '10%'}}>
-
-                                    </View>
-                                </View>
-                            );
-                        })}
+                        <SearchInput
+                            onChangeText={term => {
+                                this.searchUpdated(term);
+                            }}
+                            style={styles.searchInput}
+                            placeholder={strings.searchInputPlaceholder}
+                        />
+                        {this._renderFireTruckEquipmentsElement(
+                            filteredFireTruckEquipments,
+                        )}
                     </View>
                 );
             } else {
                 return (
-                    <View>
-                        <Text style={BoxStyles.boxContentTitleText}>NIE MA SPRZETU KUWA</Text>
+                    <View
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Text style={{fontSize: 20}}>
+                            {strings.noFireTruckEquipment}
+                        </Text>
                     </View>
                 );
             }
@@ -73,8 +151,9 @@ class FireTruckDetails extends Component {
 
     render() {
         const {fireTruckEquipments} = this.props.navigation.state.params;
-        console.log('fireTruckEquipments: ', fireTruckEquipments);
         if (fireTruckEquipments) {
+            // console.log(fireTruckEquipments);
+
             return (
                 <ScrollView style={styles.container}>
                     {this._renderFireTruckEquipments(fireTruckEquipments)}
@@ -100,4 +179,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(FireTruckDetails);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(FireTruckDetails);

@@ -16,6 +16,17 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 20,
     },
+    searchInput: {
+        fontSize: 18,
+        backgroundColor: Colors.primaryWhite,
+        marginBottom: 15,
+        color: Colors.primaryDarkBlue,
+    },
+    fireTruckEquipmentHeader: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
 });
 
 export default styles;

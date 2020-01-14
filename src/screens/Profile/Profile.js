@@ -19,11 +19,13 @@ import {getUserFireStation} from '../../redux/actions/fireStation';
 import {Divider} from 'react-native-paper';
 import Geocoder from 'react-native-geocoding';
 import AvatarFrame from '../../assets/avatar/avatar_frame.svg';
+import ModalAlarmButton from 'components/common/ModalAlarmButton';
 
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
         headerTitle: strings.profile,
         headerLeft: <DrawerMenuButton navigation={navigation} />,
+        headerRight: <ModalAlarmButton />,
     });
 
     constructor(props) {
@@ -89,15 +91,9 @@ class Profile extends Component {
                 const currentLatitude = JSON.stringify(
                     position.coords.latitude,
                 );
-                const altitude = JSON.stringify(
-                    position.coords.altitude,
-                );
-                const speed = JSON.stringify(
-                    position.coords.speed,
-                );
-                const accuracy = JSON.stringify(
-                    position.coords.accuracy,
-                );
+                const altitude = JSON.stringify(position.coords.altitude);
+                const speed = JSON.stringify(position.coords.speed);
+                const accuracy = JSON.stringify(position.coords.accuracy);
                 that.setState({currentLongitude: currentLongitude});
                 that.setState({currentLatitude: currentLatitude});
                 that.setState({altitude: altitude});
@@ -110,11 +106,11 @@ class Profile extends Component {
         );
         that.watchID = Geolocation.watchPosition(position => {
             // console.log(position);
-            const currentLongitude = JSON.stringify(position.coords.longitude,);
-            const currentLatitude = JSON.stringify(position.coords.latitude,);
-            const altitude = JSON.stringify(position.coords.altitude,);
-            const speed = JSON.stringify(position.coords.speed,);
-            const accuracy = JSON.stringify(position.coords.accuracy,);
+            const currentLongitude = JSON.stringify(position.coords.longitude);
+            const currentLatitude = JSON.stringify(position.coords.latitude);
+            const altitude = JSON.stringify(position.coords.altitude);
+            const speed = JSON.stringify(position.coords.speed);
+            const accuracy = JSON.stringify(position.coords.accuracy);
 
             that.setState({currentLongitude: currentLongitude});
             that.setState({currentLatitude: currentLatitude});
@@ -149,7 +145,6 @@ class Profile extends Component {
         if (fireStation) {
             return (
                 <View style={styles.container}>
-
                     <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
                         {/*<View>*/}
                         {/*    <Text style={BoxStyles.boxHeaderText}>{strings.firefighterData}</Text>*/}
@@ -161,14 +156,26 @@ class Profile extends Component {
                             <View style={styles.avatarContainer}>
                                 <AvatarFrame style={styles.avatarFrame} />
                                 <View style={styles.noAvatar}>
-                                    <IconEntypo name="user" size={45} color={Colors.primaryWhite} />
+                                    <IconEntypo
+                                        name="user"
+                                        size={45}
+                                        color={Colors.primaryWhite}
+                                    />
                                 </View>
                             </View>
                             <View style={styles.firefighterInformation}>
-                                <Text style={BoxStyles.boxHeaderText}>{user.firstName} {user.lastName}</Text>
-                                <Text style={BoxStyles.boxContentTitleText}>{user.email}</Text>
-                                <Text style={BoxStyles.boxContentTitleText}>{fireStation.name}</Text>
-                                <Text style={BoxStyles.boxContentTitleText}>{user.function}</Text>
+                                <Text style={BoxStyles.boxHeaderText}>
+                                    {user.firstName} {user.lastName}
+                                </Text>
+                                <Text style={BoxStyles.boxContentTitleText}>
+                                    {user.email}
+                                </Text>
+                                <Text style={BoxStyles.boxContentTitleText}>
+                                    {fireStation.name}
+                                </Text>
+                                <Text style={BoxStyles.boxContentTitleText}>
+                                    {user.function}
+                                </Text>
                             </View>
                         </View>
                     </View>
@@ -177,46 +184,97 @@ class Profile extends Component {
 
                     <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
                         <View>
-                            <Text style={BoxStyles.boxHeaderText}>{strings.currentLocation}</Text>
+                            <Text style={BoxStyles.boxHeaderText}>
+                                {strings.currentLocation}
+                            </Text>
                         </View>
 
                         <Divider style={[styles.divider, styles.divider1]} />
 
                         <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.latitude}:</Text>
-                            <Text style={BoxStyles.boxContentBodyText}>{this.state.currentLatitude}</Text>
+                            <Text
+                                style={[
+                                    BoxStyles.boxContentTitleText,
+                                    styles.row,
+                                ]}
+                            >
+                                {strings.latitude}:
+                            </Text>
+                            <Text style={BoxStyles.boxContentBodyText}>
+                                {this.state.currentLatitude}
+                            </Text>
                         </View>
 
                         <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.longitude}:</Text>
-                            <Text style={BoxStyles.boxContentBodyText}>{this.state.currentLongitude}</Text>
+                            <Text
+                                style={[
+                                    BoxStyles.boxContentTitleText,
+                                    styles.row,
+                                ]}
+                            >
+                                {strings.longitude}:
+                            </Text>
+                            <Text style={BoxStyles.boxContentBodyText}>
+                                {this.state.currentLongitude}
+                            </Text>
                         </View>
 
                         <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.altitude}:</Text>
-                            <Text style={BoxStyles.boxContentBodyText}>{this.state.altitude} m</Text>
+                            <Text
+                                style={[
+                                    BoxStyles.boxContentTitleText,
+                                    styles.row,
+                                ]}
+                            >
+                                {strings.altitude}:
+                            </Text>
+                            <Text style={BoxStyles.boxContentBodyText}>
+                                {this.state.altitude} m
+                            </Text>
                         </View>
 
                         <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.speed}:</Text>
-                            <Text style={BoxStyles.boxContentBodyText}>{this.state.speed} km/h</Text>
+                            <Text
+                                style={[
+                                    BoxStyles.boxContentTitleText,
+                                    styles.row,
+                                ]}
+                            >
+                                {strings.speed}:
+                            </Text>
+                            <Text style={BoxStyles.boxContentBodyText}>
+                                {this.state.speed} km/h
+                            </Text>
                         </View>
 
                         <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxContentTitleText, styles.row]}>{strings.accuracy}:</Text>
-                            <Text style={BoxStyles.boxContentBodyText}>{this.state.accuracy} m</Text>
+                            <Text
+                                style={[
+                                    BoxStyles.boxContentTitleText,
+                                    styles.row,
+                                ]}
+                            >
+                                {strings.accuracy}:
+                            </Text>
+                            <Text style={BoxStyles.boxContentBodyText}>
+                                {this.state.accuracy} m
+                            </Text>
                         </View>
 
                         <View style={{paddingTop: 25}} />
 
                         <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxHeaderText, styles.row]}>{strings.address}:</Text>
+                            <Text style={[BoxStyles.boxHeaderText, styles.row]}>
+                                {strings.address}:
+                            </Text>
                         </View>
 
                         <Divider style={[styles.divider, styles.divider1]} />
 
                         <View style={styles.informationContainer}>
-                            <Text style={BoxStyles.boxContentBodyText}>{this.state.addressComponent}</Text>
+                            <Text style={BoxStyles.boxContentBodyText}>
+                                {this.state.addressComponent}
+                            </Text>
                         </View>
                     </View>
                 </View>
@@ -250,4 +308,7 @@ const mapDispatchToProps = dispatch => ({
     getUserFireStation: id => dispatch(getUserFireStation(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Profile);

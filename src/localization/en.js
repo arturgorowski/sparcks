@@ -23,6 +23,21 @@ export default {
     validator_username_required: 'Username is required',
     validator_password_required: 'Password is required',
 
+    //////////SHOURTCUT TO CONVERTER
+    S: 'interior',
+    T: 'back box',
+    D: 'roof',
+    L1: 'first box on the left',
+    L2: 'second box on the left',
+    L3: 'third box on the left',
+    L4: 'fourth box on the left',
+    L5: 'fifth box on the left',
+    R1: 'first box on the right',
+    R2: 'second box on the right',
+    R3: 'third box on the right',
+    R4: 'fourth box on the right',
+    R5: 'fifth box on the right',
+
     //////////PROFILE
     firefighterData: 'Firefighter information:',
     currentLocation: 'Yours location:',
@@ -48,9 +63,11 @@ export default {
     fireFightersInformation: 'People from your fire unit:',
     phoneNumber: 'Phone number: ',
 
-    //////////FIREFIGHTER
+    //////////FIRE TRUCK
     interventionsInformation: 'Interventions: ',
     timeOfDeparture: 'Time of departure: ',
     arrivalTime: 'ArrivalTime: ',
     firefightersOnAction: 'Firefighters on action: ',
+    noFireTruckEquipment: 'No fire truck equipment.',
+    searchInputPlaceholder: 'Type a fire truck equipment to search',
 };
