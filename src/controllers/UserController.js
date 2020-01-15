@@ -3,13 +3,13 @@ import httpClient from './HttpClient';
 
 class UserController {
     login = async (username, password) => {
-        console.log(username, password);
+        // console.log(username, password);
         try {
             let token = await httpClient.post(`${LOGIN_BASE_PATH}`, {
                 username: username,
                 password: password,
             });
-            console.log('login() - token.data: ', token.data);
+            // console.log('login() - token.data: ', token.data);
             return token.data;
             // Data is the object exposes by axios for the response json
         } catch (error) {
@@ -20,7 +20,7 @@ class UserController {
     getUser = async userId => {
         try {
             let user = await httpClient.get(`firefighters/${userId}`);
-            console.log('getUser() - user.data: ', user.data);
+            // console.log('getUser() - user.data: ', user.data);
             return user.data;
         } catch (error) {
             // console.log('error UserController getUser: ', error);

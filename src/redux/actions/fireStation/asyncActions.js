@@ -5,7 +5,7 @@ export const getUserFireStation = (id) => async (dispatch) => {
     dispatch(fireStationRequest());
     try {
         const fireStation = await FireStationController.getUserFireStation(id);
-        console.log(fireStation);
+        // console.log(fireStation);
         dispatch(fireStationSuccess(fireStation));
 
     } catch (error) {

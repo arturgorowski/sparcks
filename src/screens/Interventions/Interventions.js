@@ -30,9 +30,9 @@ class Interventions extends Component {
 
     getInterventions = () => {
         const {fireStation} = this.props;
-        console.log(fireStation);
+        // console.log(fireStation);
         if (fireStation) {
-            console.log('Firestation id: ', fireStation.id);
+            // console.log('Firestation id: ', fireStation.id);
             this.props.getIntervention(fireStation.id);
         }
     };
@@ -142,7 +142,7 @@ class Interventions extends Component {
 
     render() {
         const {intervention} = this.props;
-        console.log('interventions: ', intervention);
+        // console.log('interventions: ', intervention);
         if (intervention) {
             return (
                 <ScrollView style={styles.container}>

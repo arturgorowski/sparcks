@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 5,
         borderRadius: 24,
+        right: 50,
     },
 });
 

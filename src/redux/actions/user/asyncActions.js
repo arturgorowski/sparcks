@@ -7,12 +7,12 @@ export const login = (username, password) => async dispatch => {
     dispatch(loginRequest());
     try {
         const token = await UserController.login(username, password);
-        console.log('token: ', token);
+        // console.log('token: ', token);
         dispatch(saveToken(token));
 
         if (token !== null) {
             const user = await UserController.getUser(token.userId);
-            console.log('loggedUser(): ', user);
+            // console.log('loggedUser(): ', user);
             dispatch(loginSuccess(user));
         }
     } catch (error) {

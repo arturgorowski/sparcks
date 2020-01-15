@@ -12,8 +12,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.horcrux.svg.SvgPackage;
-
-
+import com.airbnb.android.react.maps.MapsPackage;
 
 import java.util.List;
 

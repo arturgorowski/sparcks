@@ -25,7 +25,7 @@ class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
         headerTitle: strings.profile,
         headerLeft: <DrawerMenuButton navigation={navigation} />,
-        headerRight: <ModalAlarmButton />,
+        // headerRight: <ModalAlarmButton navigation={navigation} />,
     });
 
     constructor(props) {
@@ -128,7 +128,7 @@ class Profile extends Component {
             .then(json => {
                 let addressComponent = json.results[0].formatted_address;
                 this.setState({addressComponent: addressComponent});
-                console.log('ADRES:', addressComponent);
+                // console.log('ADRES:', addressComponent);
             })
             .catch(error => console.warn(error));
     };
@@ -140,8 +140,8 @@ class Profile extends Component {
 
     render() {
         const {fireStation, user} = this.props;
-        console.log('fireStation: ', fireStation);
-        console.log('user: ', user);
+        // console.log('fireStation: ', fireStation);
+        // console.log('user: ', user);
         if (fireStation) {
             return (
                 <View style={styles.container}>

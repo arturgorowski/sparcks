@@ -33,7 +33,7 @@ class Firefighters extends Component {
 
     getFirefighters = () => {
         const {fireStation} = this.props;
-        console.log('firefighter firestation', fireStation);
+        // console.log('firefighter firestation', fireStation);
         if (fireStation) {
             this.props.getFirefighter(fireStation.id);
         }
@@ -124,7 +124,7 @@ class Firefighters extends Component {
 
     render() {
         const {firefighter} = this.props;
-        console.log('firefighter: ', firefighter);
+        // console.log('firefighter: ', firefighter);
         if (firefighter) {
             return (
                 <ScrollView style={styles.container}>

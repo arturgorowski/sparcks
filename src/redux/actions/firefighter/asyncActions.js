@@ -5,7 +5,7 @@ export const getFirefighter = (id) => async (dispatch) => {
     dispatch(firefightersRequest());
     try {
         const firefighter = await FirefighterController.getFirefighter(id);
-        console.log(firefighter);
+        // console.log(firefighter);
         dispatch(firefightersSuccess(firefighter));
 
     } catch (error) {
