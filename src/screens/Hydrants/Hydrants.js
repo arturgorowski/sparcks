@@ -8,7 +8,9 @@ import DrawerMenuButton from 'components/common/DrawerMenuButton';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {hydrants} from '../../assets/hydrants';
-import Geojson from 'react-native-geojson';
+// import Geojson from 'react-native-geojson';
+import Geojson from '../../helpers/Geojson/index';
+import circle from '../../assets/circle-16.png';
 
 class Hydrants extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -118,17 +120,13 @@ class Hydrants extends Component {
         // });
     };
 
-
-
     render() {
         console.log('render: ', this.state.region.latitude);
         console.log('render: ', this.state.region.longitude);
         return (
             <View style={styles.container}>
                 <MapView style={styles.map} region={this.state.region}>
-                    {/*{hydrants.map(marker => (*/}
-                        <Geojson geojson={hydrants} />
-                    {/*))}*/}
+                    <Geojson geojson={hydrants} icon={circle} />
                 </MapView>
             </View>
         );
