@@ -8,9 +8,9 @@ import DrawerMenuButton from 'components/common/DrawerMenuButton';
 import MapView from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {hydrants} from '../../assets/hydrants';
-// import Geojson from 'react-native-geojson';
 import Geojson from '../../helpers/Geojson/index';
 import circle from '../../assets/circle-16.png';
+import LoadingIndicator from '../../components/common/LoadingIndicator';
 
 class Hydrants extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -38,9 +38,9 @@ class Hydrants extends Component {
         },
     };
 
-    onRegionChange = region => {
-        this.setState({region});
-    };
+    // onRegionChange = region => {
+    //     this.setState({region});
+    // };
 
     componentDidMount() {
         this.checkPermission();
@@ -86,8 +86,8 @@ class Hydrants extends Component {
                 const currentLatitude = JSON.stringify(
                     position.coords.latitude,
                 );
-                console.log('callLocation: ', currentLatitude);
-                console.log('callLocation: ', currentLongitude);
+                // console.log('callLocation: ', currentLatitude);
+                // console.log('callLocation: ', currentLongitude);
                 that.setState({
                     region: {
                         longitude: parseFloat(currentLongitude),
@@ -103,33 +103,44 @@ class Hydrants extends Component {
             error => alert(error.message),
             {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
         );
-        // that.watchID = Geolocation.watchPosition(position => {
-        //     const currentLongitude = JSON.stringify(position.coords.longitude);
-        //     const currentLatitude = JSON.stringify(position.coords.latitude);
-        //     console.log('callLocation: ', currentLatitude);
-        //     console.log('callLocation: ', currentLongitude);
-        //     that.setState({
-        //         region: {
-        //             longitude: parseFloat(currentLongitude),
-        //             latitude: parseFloat(currentLatitude),
-        //             latitudeDelta: 0.0922,
-        //             longitudeDelta: 0.0421,
-        //         },
-        //     });
-        //     // that.setState({region: {latitude: currentLatitude}});
-        // });
+        that.watchID = Geolocation.watchPosition(position => {
+            const currentLongitude = JSON.stringify(position.coords.longitude);
+            const currentLatitude = JSON.stringify(position.coords.latitude);
+            // console.log('callLocation: ', currentLatitude);
+            // console.log('callLocation: ', currentLongitude);
+            that.setState({
+                region: {
+                    longitude: parseFloat(currentLongitude),
+                    latitude: parseFloat(currentLatitude),
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                },
+            });
+            // that.setState({region: {latitude: currentLatitude}});
+        });
     };
 
     render() {
-        console.log('render: ', this.state.region.latitude);
-        console.log('render: ', this.state.region.longitude);
-        return (
-            <View style={styles.container}>
-                <MapView style={styles.map} region={this.state.region}>
-                    <Geojson geojson={hydrants} icon={circle} />
-                </MapView>
-            </View>
-        );
+        // console.log('render: ', this.state.region.latitude);
+        // console.log('render: ', this.state.region.longitude);
+        // const lat = this.state.region.latitude;
+        // console.log(lat);
+        {
+            if (this.state.region.latitude > 0) {
+                return (
+                    <View style={styles.container}>
+                        <MapView
+                            style={styles.map}
+                            region={this.state.region}
+                            minZoomLevel={15}
+                        >
+                            <Geojson geojson={hydrants} icon={circle} />
+                        </MapView>
+                    </View>
+                );
+            }
+        }
+        return <LoadingIndicator />;
     }
 }
 

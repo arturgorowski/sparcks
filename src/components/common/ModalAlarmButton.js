@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {DrawerActions} from 'react-navigation-drawer';
 import {TouchableRipple} from 'react-native-paper';
 import Colors from '../../helpers/Colors';
-import DropDownStyle from 'helpers/DropDownStyle';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Modal from 'react-native-modal';
+import modalStyles from '../../assets/styles/modalStyles';
+
 
 const styles = StyleSheet.create({
     button: {
@@ -15,22 +17,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 5,
         borderRadius: 24,
-        right: 50,
+        right: 0,
+    },
+    icon: {
+        position: 'absolute',
+        right: 10,
+        top: 2,
+        //width: '10%',
     },
 });
 
-const ModalAlarmButton = () => (
-    <TouchableRipple
-        borderless
-        style={styles.button}
+const ModalAlarmButton = props => (
+    <Modal
+        isVisible={props.onPress}
+        onBackdropPress={() => props.onDismiss()}
+        avoidKeyboard
+        useNativeDriver
     >
-        <Ionicons
-            name="ios-settings"
-            size={28}
-            color={Colors.primaryDarkBlue}
-            style={DropDownStyle.dropDownIcon}
-        />
-    </TouchableRipple>
+        <View style={modalStyles.container}>
+            <Text style={modalStyles.title}>Pożar</Text>
+        </View>
+    </Modal>
 );
 
 ModalAlarmButton.propTypes = {

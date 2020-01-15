@@ -29,7 +29,7 @@ class FireTruckList extends Component {
                 return (
                     <TouchableOpacity
                         key={i}
-                        style={[BoxStyles.boxContainer, ShadowStyles.shadow, {marginBottom: 15, display: 'flex', flexDirection: 'row'}]}
+                        style={[BoxStyles.boxContainer, ShadowStyles.shadow, {marginBottom: 15, display: 'flex', flexDirection: 'row', justifyContent:'space-between'}]}
                         onPress={() => {
                             navigation.navigate('FireTruckDetails', {
                                 name: item.name,
@@ -37,7 +37,7 @@ class FireTruckList extends Component {
                             });
                         }}
                     >
-                        <View style={{width: '80%'}}>
+                        <View>
                             <View style={styles.fireTruckList}>
                                 <View style={{width: '70%'}}>
                                     <Text style={[BoxStyles.boxHeaderText, {fontWeight: '700'}]}>{item.name}</Text>
@@ -52,12 +52,12 @@ class FireTruckList extends Component {
                                 <Text style={[BoxStyles.boxContentTitleText, {color: Colors.primaryPurple}]}>{item.pumpCapacity}l/s</Text>
                             </View>
                         </View>
-                        <View style={{width: '20%'}}>
+                        <View>
                             <Ionicons
                                 name="ios-arrow-forward"
                                 size={28}
                                 color={Colors.primaryDarkBlue}
-                                style={DropDownStyle.dropDownIcon}
+                                style={[BoxStyles.dropDownIcon, {right: 15, alignItems: 'center'}]}
                             />
                         </View>
                     </TouchableOpacity>

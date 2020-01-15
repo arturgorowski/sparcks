@@ -10,12 +10,10 @@ const styles = StyleSheet.create({
     },
     avatar: {
         position: 'absolute',
-        top: 11,
-        left: 11,
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: Colors.primaryGrey10,
+        top: 5,
+        left: 75,
+        width: 100,
+        height: 120,
     },
     noAvatar: {
         position: 'absolute',
@@ -36,7 +34,7 @@ const styles = StyleSheet.create({
     header: {
         padding: 20,
         marginBottom: 20,
-        height: 200,
+        height: 150,
         justifyContent: 'center',
         backgroundColor: Colors.primaryWhite,
     },

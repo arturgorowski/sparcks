@@ -25,7 +25,6 @@ class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
         headerTitle: strings.profile,
         headerLeft: <DrawerMenuButton navigation={navigation} />,
-        // headerRight: <ModalAlarmButton navigation={navigation} />,
     });
 
     constructor(props) {
@@ -39,6 +38,7 @@ class Profile extends Component {
         altitude: 0,
         accuracy: 0,
         addressComponent: null,
+        showModal: false,
     };
 
     componentDidMount = () => {

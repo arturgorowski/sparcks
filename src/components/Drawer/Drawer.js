@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {Text, SafeAreaView, View, ScrollView, Platform, TouchableOpacity} from 'react-native';
+import {Text, SafeAreaView, View, ScrollView, Platform, TouchableOpacity, Image} from 'react-native';
 import {DrawerItems} from 'react-navigation-drawer';
 import {connect} from 'react-redux';
 import {Divider, TouchableRipple} from 'react-native-paper';
@@ -10,7 +10,9 @@ import Colors from '../../helpers/Colors';
 import strings from '../../localization';
 import styles from './styles';
 import {logout} from '../../redux/actions/user';
-import LogoutIcon from '../../assets/menu/logout.svg';
+// import LogoutIcon from '../../assets/menu/logout.svg';
+import LogoutIcon from '../../assets/menu/logout1.svg';
+import Logo from '../../assets/logo/sparcks.png';
 
 class Drawer extends Component {
     componentDidUpdate() {
@@ -50,30 +52,20 @@ class Drawer extends Component {
                             bounces={false}
                         >
                             <View style={styles.header}>
-                                {/*<View style={styles.avatarContainer}>*/}
-                                {/*    <AvatarFrame style={styles.avatarFrame}/>*/}
-                                {/*    {user.avatar*/}
-                                {/*        ? (*/}
-                                {/*            <Image*/}
-                                {/*                style={styles.avatar}*/}
-                                {/*                resizeMode="cover"*/}
-                                {/*                source={{uri: `${API_URL}images/avatar/${user.avatar}`}}*/}
-                                {/*            />*/}
-                                {/*        )*/}
-                                {/*        : (*/}
-                                {/*            <View style={styles.noAvatar}>*/}
-                                {/*                <IconEntypo name="user" size={45} color={Colors.primaryWhite}/>*/}
-                                {/*            </View>*/}
-                                {/*        )*/}
-                                {/*    }*/}
-                                {/*</View>*/}
+                                <View style={styles.avatarContainer}>
+                                    <Image
+                                        style={styles.avatar}
+                                        resizeMode="cover"
+                                        source={Logo}
+                                    />
+                                </View>
 
-                                <Text style={styles.headerName}>
-                                    {`${user.firstName} ${user.lastName}`}
-                                </Text>
-                                <Text style={styles.headerLogin}>
-                                    {user.email}
-                                </Text>
+                                {/*<Text style={styles.headerName}>*/}
+                                {/*    {`${user.firstName} ${user.lastName}`}*/}
+                                {/*</Text>*/}
+                                {/*<Text style={styles.headerLogin}>*/}
+                                {/*    {user.email}*/}
+                                {/*</Text>*/}
                             </View>
 
                             <View style={styles.navContainer}>

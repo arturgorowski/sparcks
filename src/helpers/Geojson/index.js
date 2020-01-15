@@ -88,6 +88,7 @@ const Geojson = props => {
                             coordinate={overlay.coordinates}
                             // pinColor={props.color}
                             icon={props.icon}
+                            // onPress={props.aleert(overlay.properties)}
                         />
                     );
                 }
