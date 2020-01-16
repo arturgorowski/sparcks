@@ -37,7 +37,7 @@ class Drawer extends Component {
     );
 
     render() {
-        const {user} = this.props;
+        const {user, navigation} = this.props;
         if (user) {
             return (
                 <Fragment>
@@ -51,7 +51,13 @@ class Drawer extends Component {
                             contentContainerStyle={{flexGrow: 1}}
                             bounces={false}
                         >
-                            <View style={styles.header}>
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={styles.header}
+                                // onPress={() => {
+                                //     navigation.navigate('Alarm');
+                                // }}
+                            >
                                 <View style={styles.avatarContainer}>
                                     <Image
                                         style={styles.avatar}
@@ -59,14 +65,7 @@ class Drawer extends Component {
                                         source={Logo}
                                     />
                                 </View>
-
-                                {/*<Text style={styles.headerName}>*/}
-                                {/*    {`${user.firstName} ${user.lastName}`}*/}
-                                {/*</Text>*/}
-                                {/*<Text style={styles.headerLogin}>*/}
-                                {/*    {user.email}*/}
-                                {/*</Text>*/}
-                            </View>
+                            </TouchableOpacity>
 
                             <View style={styles.navContainer}>
                                 <DrawerItems

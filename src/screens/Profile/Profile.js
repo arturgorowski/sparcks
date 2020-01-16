@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, PermissionsAndroid, Platform} from 'react-native';
+import {View, Text, PermissionsAndroid, Platform, TouchableOpacity, Modal, Alert} from 'react-native';
 import styles from './styles';
 import Colors from '../../helpers/Colors';
 import ShadowStyles from '../../helpers/ShadowStyles';
@@ -19,7 +19,7 @@ import {getUserFireStation} from '../../redux/actions/fireStation';
 import {Divider} from 'react-native-paper';
 import Geocoder from 'react-native-geocoding';
 import AvatarFrame from '../../assets/avatar/avatar_frame.svg';
-import ModalAlarmButton from 'components/common/ModalAlarmButton';
+import ProfileIcon from '../../assets/menu/user-profiles.svg';
 
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -39,6 +39,7 @@ class Profile extends Component {
         accuracy: 0,
         addressComponent: null,
         showModal: false,
+        modalVisible: false,
     };
 
     componentDidMount = () => {
@@ -133,6 +134,143 @@ class Profile extends Component {
             .catch(error => console.warn(error));
     };
 
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
+
+    _renderModalView = () => (
+        <View style={{marginTop: 22}}>
+            <Modal
+                animationType="fade"
+                transparent={false}
+                visible={this.state.modalVisible}
+            >
+                <View style={{marginTop: 22}}>
+                    <View>
+                        <Text>Hello World!</Text>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}
+                        >
+                            <Text>Hide Modal</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+        </View>
+    );
+
+    _renderUserInformationView = (user, fireStation) => (
+        <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
+            <View style={styles.informationContainer}>
+                <TouchableOpacity
+                    activeOpacity={1}
+                    style={styles.avatarContainer}
+                    onPress={() => this.setModalVisible(true)}
+                >
+                    <AvatarFrame style={styles.avatarFrame} />
+                    <View style={styles.noAvatar}>
+                        {/*<IconEntypo*/}
+                        {/*    name="user"*/}
+                        {/*    size={45}*/}
+                        {/*    color={Colors.primaryWhite}*/}
+                        {/*/>*/}
+                        <ProfileIcon width={40} height={40} />
+                    </View>
+                </TouchableOpacity>
+                <View style={styles.firefighterInformation}>
+                    <Text style={BoxStyles.boxHeaderText}>
+                        {user.firstName} {user.lastName}
+                    </Text>
+                    <Text style={BoxStyles.boxContentTitleText}>
+                        {user.email}
+                    </Text>
+                    <Text style={BoxStyles.boxContentTitleText}>
+                        {fireStation.name}
+                    </Text>
+                    <Text style={BoxStyles.boxContentTitleText}>
+                        {user.function}
+                    </Text>
+                </View>
+            </View>
+        </View>
+    );
+
+    _renderCurrentLocationView = () => (
+        <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
+            <View>
+                <Text style={BoxStyles.boxHeaderText}>
+                    {strings.currentLocation}
+                </Text>
+            </View>
+
+            <Divider style={[styles.divider, styles.divider1]} />
+
+            <View style={styles.informationContainer}>
+                <Text style={[BoxStyles.boxContentTitleText, styles.row]}>
+                    {strings.latitude}:
+                </Text>
+                <Text style={BoxStyles.boxContentBodyText}>
+                    {this.state.currentLatitude}
+                </Text>
+            </View>
+
+            <View style={styles.informationContainer}>
+                <Text style={[BoxStyles.boxContentTitleText, styles.row]}>
+                    {strings.longitude}:
+                </Text>
+                <Text style={BoxStyles.boxContentBodyText}>
+                    {this.state.currentLongitude}
+                </Text>
+            </View>
+
+            <View style={styles.informationContainer}>
+                <Text style={[BoxStyles.boxContentTitleText, styles.row]}>
+                    {strings.altitude}:
+                </Text>
+                <Text style={BoxStyles.boxContentBodyText}>
+                    {this.state.altitude} m
+                </Text>
+            </View>
+
+            <View style={styles.informationContainer}>
+                <Text style={[BoxStyles.boxContentTitleText, styles.row]}>
+                    {strings.speed}:
+                </Text>
+                <Text style={BoxStyles.boxContentBodyText}>
+                    {this.state.speed} km/h
+                </Text>
+            </View>
+
+            <View style={styles.informationContainer}>
+                <Text style={[BoxStyles.boxContentTitleText, styles.row]}>
+                    {strings.accuracy}:
+                </Text>
+                <Text style={BoxStyles.boxContentBodyText}>
+                    {this.state.accuracy} m
+                </Text>
+            </View>
+
+            <View style={{paddingTop: 25}} />
+
+            <View style={styles.informationContainer}>
+                <Text style={[BoxStyles.boxHeaderText, styles.row]}>
+                    {strings.address}:
+                </Text>
+            </View>
+
+            <Divider style={[styles.divider, styles.divider1]} />
+
+            <View style={styles.informationContainer}>
+                <Text style={BoxStyles.boxContentBodyText}>
+                    {this.state.addressComponent}
+                </Text>
+            </View>
+        </View>
+    );
+
     loggedUserFireStation = () => {
         const {user} = this.props;
         this.props.getUserFireStation(user.fireStationId);
@@ -145,138 +283,17 @@ class Profile extends Component {
         if (fireStation) {
             return (
                 <View style={styles.container}>
-                    <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
-                        {/*<View>*/}
-                        {/*    <Text style={BoxStyles.boxHeaderText}>{strings.firefighterData}</Text>*/}
-                        {/*</View>*/}
-
-                        {/*<Divider style={styles.divider} />*/}
-
-                        <View style={styles.informationContainer}>
-                            <View style={styles.avatarContainer}>
-                                <AvatarFrame style={styles.avatarFrame} />
-                                <View style={styles.noAvatar}>
-                                    <IconEntypo
-                                        name="user"
-                                        size={45}
-                                        color={Colors.primaryWhite}
-                                    />
-                                </View>
-                            </View>
-                            <View style={styles.firefighterInformation}>
-                                <Text style={BoxStyles.boxHeaderText}>
-                                    {user.firstName} {user.lastName}
-                                </Text>
-                                <Text style={BoxStyles.boxContentTitleText}>
-                                    {user.email}
-                                </Text>
-                                <Text style={BoxStyles.boxContentTitleText}>
-                                    {fireStation.name}
-                                </Text>
-                                <Text style={BoxStyles.boxContentTitleText}>
-                                    {user.function}
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
+                    {this._renderUserInformationView(user, fireStation)}
 
                     <View style={{paddingTop: 15}} />
 
-                    <View style={[BoxStyles.boxContainer, ShadowStyles.shadow]}>
-                        <View>
-                            <Text style={BoxStyles.boxHeaderText}>
-                                {strings.currentLocation}
-                            </Text>
-                        </View>
+                    {this.currentLongitude > 0 ? (
+                        <LoadingIndicator />
+                    ) : (
+                        this._renderCurrentLocationView()
+                    )}
 
-                        <Divider style={[styles.divider, styles.divider1]} />
-
-                        <View style={styles.informationContainer}>
-                            <Text
-                                style={[
-                                    BoxStyles.boxContentTitleText,
-                                    styles.row,
-                                ]}
-                            >
-                                {strings.latitude}:
-                            </Text>
-                            <Text style={BoxStyles.boxContentBodyText}>
-                                {this.state.currentLatitude}
-                            </Text>
-                        </View>
-
-                        <View style={styles.informationContainer}>
-                            <Text
-                                style={[
-                                    BoxStyles.boxContentTitleText,
-                                    styles.row,
-                                ]}
-                            >
-                                {strings.longitude}:
-                            </Text>
-                            <Text style={BoxStyles.boxContentBodyText}>
-                                {this.state.currentLongitude}
-                            </Text>
-                        </View>
-
-                        <View style={styles.informationContainer}>
-                            <Text
-                                style={[
-                                    BoxStyles.boxContentTitleText,
-                                    styles.row,
-                                ]}
-                            >
-                                {strings.altitude}:
-                            </Text>
-                            <Text style={BoxStyles.boxContentBodyText}>
-                                {this.state.altitude} m
-                            </Text>
-                        </View>
-
-                        <View style={styles.informationContainer}>
-                            <Text
-                                style={[
-                                    BoxStyles.boxContentTitleText,
-                                    styles.row,
-                                ]}
-                            >
-                                {strings.speed}:
-                            </Text>
-                            <Text style={BoxStyles.boxContentBodyText}>
-                                {this.state.speed} km/h
-                            </Text>
-                        </View>
-
-                        <View style={styles.informationContainer}>
-                            <Text
-                                style={[
-                                    BoxStyles.boxContentTitleText,
-                                    styles.row,
-                                ]}
-                            >
-                                {strings.accuracy}:
-                            </Text>
-                            <Text style={BoxStyles.boxContentBodyText}>
-                                {this.state.accuracy} m
-                            </Text>
-                        </View>
-
-                        <View style={{paddingTop: 25}} />
-
-                        <View style={styles.informationContainer}>
-                            <Text style={[BoxStyles.boxHeaderText, styles.row]}>
-                                {strings.address}:
-                            </Text>
-                        </View>
-
-                        <Divider style={[styles.divider, styles.divider1]} />
-
-                        <View style={styles.informationContainer}>
-                            <Text style={BoxStyles.boxContentBodyText}>
-                                {this.state.addressComponent}
-                            </Text>
-                        </View>
-                    </View>
+                    {this._renderModalView()}
                 </View>
             );
         }

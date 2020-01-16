@@ -78,6 +78,7 @@ const makeCoordinates = feature => {
 
 const Geojson = props => {
     const overlays = makeOverlays(props.geojson.features);
+    // console.log(overlays);
     return (
         <View>
             {overlays.map(overlay => {

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import Colors from '../../helpers/Colors';
 
 const styles = StyleSheet.create({
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         height: 150,
         justifyContent: 'center',
         backgroundColor: Colors.primaryWhite,
+        color: Colors.primaryBlue,
     },
     headerName: {
         color: Colors.primaryGrey,
