@@ -31,7 +31,7 @@ class Maps extends Component {
     handleMarkerPress = () => {
         // const markerID = event.nativeEvent.id;
         // console.log('WHAT', markerID);
-        console.log('WHAT');
+        //console.log('WHAT');
     };
 
     _renderFirefighterLocation = locations => (
@@ -56,12 +56,8 @@ class Maps extends Component {
                         <MapView.Callout width={120} height={40}>
                             <TouchableOpacity
                                 underlayColor="transparent"
-                                onPress={() =>
-                                    console.log('callout was clicked')
-                                }
                             >
-                                <Text>{location.firstName}</Text>
-                                <Text>{location.lastName}</Text>
+                                <Text>{location.firstName} {location.lastName}</Text>
                             </TouchableOpacity>
                         </MapView.Callout>
                     </MapView.Marker>
