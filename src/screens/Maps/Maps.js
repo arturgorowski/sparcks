@@ -53,7 +53,7 @@ class Maps extends Component {
                         // onPress={() => this.handleMarkerPress()}
                         // onCalloutPress={() => this.handleMarkerPress()}
                     >
-                        <MapView.Callout width={40} height={40}>
+                        <MapView.Callout width={120} height={40}>
                             <TouchableOpacity
                                 underlayColor="transparent"
                                 onPress={() =>
@@ -61,6 +61,7 @@ class Maps extends Component {
                                 }
                             >
                                 <Text>{location.firstName}</Text>
+                                <Text>{location.lastName}</Text>
                             </TouchableOpacity>
                         </MapView.Callout>
                     </MapView.Marker>
