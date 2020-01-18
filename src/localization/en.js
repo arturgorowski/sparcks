@@ -51,6 +51,10 @@ export default {
     permissionMessage: 'This App needs to Access your location',
     permissionDenied: 'Permission Denied',
     permissionError: 'Error, cannot get your location',
+    modalTitle: 'Confirm participation in the action!',
+    actionTypeTitle: 'FIRE',
+    confirm: 'confirm',
+    discard: 'discard',
 
     //////////FIRE STATION
     fireStationData: 'Fire Station information:',

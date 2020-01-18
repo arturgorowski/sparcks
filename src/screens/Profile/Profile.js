@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, PermissionsAndroid, Platform, TouchableOpacity, Modal, Alert} from 'react-native';
+import {View, Text, PermissionsAndroid, Platform, TouchableOpacity, Modal} from 'react-native';
 import styles from './styles';
 import Colors from '../../helpers/Colors';
 import ShadowStyles from '../../helpers/ShadowStyles';
@@ -20,6 +20,7 @@ import {Divider} from 'react-native-paper';
 import Geocoder from 'react-native-geocoding';
 import AvatarFrame from '../../assets/avatar/avatar_frame.svg';
 import ProfileIcon from '../../assets/menu/user-profiles.svg';
+import modalStyles from "assets/styles/modalStyles";
 
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -139,23 +140,37 @@ class Profile extends Component {
     }
 
     _renderModalView = () => (
-        <View style={{marginTop: 22}}>
+        <View>
             <Modal
                 animationType="fade"
                 transparent={false}
                 visible={this.state.modalVisible}
             >
-                <View style={{marginTop: 22}}>
+                <View style={modalStyles.container}>
                     <View>
-                        <Text>Hello World!</Text>
+                        <Text style={modalStyles.title}>
+                            {strings.modalTitle}
+                        </Text>
+                        <Text style={modalStyles.actionTypeTitle}>
+                            --- {strings.actionTypeTitle} ---
+                        </Text>
+                        <Text style={modalStyles.title}>
+                            ul. Partyzantów 25, Tuchów
+                        </Text>
 
-                        <TouchableOpacity
-                            onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                            }}
-                        >
-                            <Text>Hide Modal</Text>
-                        </TouchableOpacity>
+                        <View style={modalStyles.buttonContainer}>
+                            <TouchableOpacity
+                                style={modalStyles.btnConfirm}
+                                onPress={() => this.setModalVisible(!this.state.modalVisible)}
+                            >
+                                <Text style={modalStyles.btnText}>{strings.confirm}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={modalStyles.btnDiscard}
+                                onPress={() => this.setModalVisible(!this.state.modalVisible)}>
+                                <Text style={modalStyles.btnText}>{strings.discard}</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </Modal>

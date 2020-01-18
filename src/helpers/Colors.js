@@ -18,6 +18,7 @@ export default {
     primarySteel: '#556284',
     primaryDarkSteel: '#2b3244',
     primaryYellow: '#fdbf5e',
+    primaryRed: '#fc2403',
 
 
     primaryGrey: 'dimgrey',
