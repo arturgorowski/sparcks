@@ -19,6 +19,7 @@ import FireTruckIcon from '../../assets/menu/transport.svg';
 import FirefighterIcon from '../../assets/menu/fireman.svg';
 import InterventionIcon from '../../assets/menu/fire-alarm.svg';
 import HydrantIcon from '../../assets/menu/hydrant.svg';
+import MapsIcon from '../../assets/menu/map.svg';
 
 const defaultNavigationOptions = {
     headerTintColor: (Platform.OS === 'android') ? Colors.primaryGrey : null,
@@ -89,7 +90,7 @@ const AppStack = createDrawerNavigator(
         },
         Maps: {
             navigationOptions: {
-                drawerIcon: <ProfileIcon width={35} height={35} />,
+                drawerIcon: <MapsIcon width={35} height={35} />,
                 drawerLabel: strings.maps,
             },
             screen: MapsStack,

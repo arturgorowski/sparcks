@@ -1,8 +1,8 @@
 import LocalizedStrings from 'react-native-localization';
-import en from './en';
+import pl from './pl';
 
 const strings = new LocalizedStrings({
-    en,
+    pl,
 });
 
 export default strings;

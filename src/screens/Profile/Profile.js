@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, PermissionsAndroid, Platform, TouchableOpacity, Modal} from 'react-native';
 import styles from './styles';
-import Colors from '../../helpers/Colors';
 import ShadowStyles from '../../helpers/ShadowStyles';
 import BoxStyles from '../../helpers/BoxStyles';
 import strings from 'localization/index';
@@ -9,7 +8,6 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {API_KEY} from 'react-native-dotenv';
 import Geolocation from '@react-native-community/geolocation';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 import LoadingIndicator from 'components/common/LoadingIndicator';
 import DrawerMenuButton from '../../components/common/DrawerMenuButton';
 import getUserState from '../../redux/selectors/UserSelectors';
@@ -20,7 +18,7 @@ import {Divider} from 'react-native-paper';
 import Geocoder from 'react-native-geocoding';
 import AvatarFrame from '../../assets/avatar/avatar_frame.svg';
 import ProfileIcon from '../../assets/menu/user-profiles.svg';
-import modalStyles from "assets/styles/modalStyles";
+import modalStyles from 'assets/styles/modalStyles';
 
 class Profile extends Component {
     static navigationOptions = ({navigation}) => ({
