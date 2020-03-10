@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {StatusBar, View, Text, Image, Platform, AsyncStorage} from 'react-native';
+import {StatusBar, View, Text, Image, Platform} from 'react-native';
 import {Provider as StoreProvider} from 'react-redux';
 import {Provider as PaperProvider} from 'react-native-paper';
-import NetInfo from '@react-native-community/netinfo';
+// import NetInfo from '@react-native-community/netinfo';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Navigation from './components/navigation';
 import Colors from './helpers/Colors';
@@ -24,17 +24,16 @@ class App extends Component {
         persist(() => {
             this.setState({ready: true});
         });
-        NetInfo.addEventListener(state => {
-            if (state.isConnected) {
-                this.handleConnectivityChange();
-            }
-        });
+        // NetInfo.addEventListener(state => {
+        //     if (state.isConnected) {
+        //         this.handleConnectivityChange();
+        //     }
+        // });
     }
 
     componentWillUnmount() {
         //NetInfo.removeEventListener('connectionChange', this.handleConnectivityChange);
     }
-
 
     handleConnectivityChange = () => {
         this.setState({isConnected: true});

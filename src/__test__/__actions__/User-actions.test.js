@@ -1,5 +1,5 @@
 import configureStore from 'redux-mock-store'; //ES6 modules
-import * as userActions from 'redux/actions/user/actions';
+import * as userActions from '../../redux/actions/user/actions';
 import thunk from 'redux-thunk';
 
 const middlewares = [thunk];
@@ -19,24 +19,70 @@ describe('UserActions', () => {
 
     const store = mockStore(user);
 
-    it('should create an action for login', () => {
-        const expectedAction = {type: userActions.actionTypes.LOGIN_REQUEST};
+    it('should create an action for login request', () => {
+        const expectedAction = {
+            type: userActions.actionTypes.LOGIN_REQUEST,
+        };
 
         // Dispatch the action
-        store.dispatch(userActions.login(credentials.username, credentials.password));
+        store.dispatch(
+            userActions.loginRequest(
+                credentials.username,
+                credentials.password,
+            ),
+        );
 
         // Test if your store dispatched the expected actions
         const actions = store.getActions();
         expect(actions).toEqual([expectedAction]);
     });
 
-    it('should create an action for logout', () => {
+    it('should create an action for login success', () => {
         const expectedAction = {
-            type: userActions.actionTypes.LOGOUT,
+            type: userActions.actionTypes.LOGIN_SUCCESS,
         };
 
         // Dispatch the action
-        store.dispatch(userActions.logout());
+        store.dispatch(userActions.loginSuccess());
+
+        // Test if your store dispatched the expected actions
+        const actions = store.getActions();
+        expect(actions).toEqual([expectedAction]);
+    });
+
+    it('should create an action for login error', () => {
+        const expectedAction = {
+            type: userActions.actionTypes.LOGIN_ERROR,
+        };
+
+        // Dispatch the action
+        store.dispatch(userActions.loginError());
+
+        // Test if your store dispatched the expected actions
+        const actions = store.getActions();
+        expect(actions).toEqual([expectedAction]);
+    });
+
+    it('should create an action for logout request', () => {
+        const expectedAction = {
+            type: userActions.actionTypes.LOGOUT_REQUEST,
+        };
+
+        // Dispatch the action
+        store.dispatch(userActions.logoutRequest());
+
+        // Test if your store dispatched the expected actions
+        const actions = store.getActions();
+        expect(actions).toEqual([expectedAction]);
+    });
+
+    it('should create an action for logout error', () => {
+        const expectedAction = {
+            type: userActions.actionTypes.LOGOUT_ERROR,
+        };
+
+        // Dispatch the action
+        store.dispatch(userActions.logoutError());
 
         // Test if your store dispatched the expected actions
         const actions = store.getActions();
